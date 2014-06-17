@@ -2,7 +2,7 @@ desc "Fetches transactions and figures out Bookvalue of shares"
 task :fetch_sales => :environment do
 	# require 'mime'
 require 'gmail'
-require 'Nokogiri'
+require 'nokogiri'
 require 'open-uri'
 
 def clean(range, note)
