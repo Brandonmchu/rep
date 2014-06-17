@@ -31,14 +31,13 @@ gmail = Gmail.connect(ENV["GMAIL_EMAIL"], ENV["GMAIL_PASSWORD"])
 
 	urls = []
 	urls << clean(four,note) << clean(five,note) << clean(six,note) << clean(eight,note) << clean(infinite,note)
-	print urls
 
 gmail.logout
 
 	urls.each do |url|
+		url = "http://"+url
 		doc = Nokogiri::HTML(open(url))
 		listings = doc.css("table")
-
 		listings.each do |listing|
 			if listing.attr("border") == "1"
 				
@@ -47,7 +46,13 @@ gmail.logout
 				parsed_links_regex = /(?<=,|^)'\K[^?]+/
 				image_descriptions_regex = /(?<=commArray = new Array\()[^\)]*/
 				parsed_descriptions_regex = /[^,]+/
-				
+				if all_links_regex.match(images).nil?
+						image_urls = []
+						image_descriptions = []
+				else
+						image_urls = all_links_regex.match(images)[0].scan(parsed_links_regex)
+						image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
+				end
 				sale = {
 					address: listing.at_css("tr[1] td[2] tr td").text,
 					listprice: listing.at_css("tr[1] td[2] tr td[2]").text,
@@ -74,8 +79,8 @@ gmail.logout
 					garage_type: listing.at_css("tr[4] td[2] tr[4] td").text,
 					parking_spaces: listing.at_css("tr[4] td[2] tr[5] td").text,
 					pool: listing.at_css("tr[4] td[2] tr[7] td").text,
-					image_urls: all_links_regex.match(images)[0].scan(parsed_links_regex),
-					image_descriptions: image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
+					image_urls: image_urls,
+					image_descriptions: image_descriptions
 				}
 				Sale.create!(sale)
 			end
