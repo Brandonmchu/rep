@@ -14,7 +14,7 @@ gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
 	
 	# get body of email from gmail
 	# add :unread to emails(...) to get only the unread one
-	mail = gmail.inbox.emails(:from => "brandon.mk.chu@gmail.com", :subject => "Fwd: Toronto Real Estate Sold")
+	mail = gmail.inbox.emails(:unread, :from => "brandon.mk.chu@gmail.com", :subject => "Fwd: Toronto Real Estate Sold")
 	note = mail.last.body
 	
 	# regex to parse body
