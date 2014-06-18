@@ -14,23 +14,25 @@ gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
 	
 	# get body of email from gmail
 	# add :unread to emails(...) to get only the unread one
-	mail = gmail.inbox.emails(:unread, :from => "brandon.mk.chu@gmail.com", :subject => "Fwd: Toronto Real Estate Sold")
-	note = mail.first.body
+	mail = gmail.inbox.emails(:from => "brandon.mk.chu@gmail.com", :subject => "Fwd: Toronto Real Estate Sold")
+	note = mail.last.body
 	
 	# regex to parse body
 	four = /(?<=Under \$400,000 \=C2\=BB
    <http:\/\/)[^>]*/
-	five = /(?<=\$400,000 to \$500,000 \=C2\=BB
+	five = /(?<=\$400,000 to \$480,000 \=C2\=BB
    <http:\/\/)[^>]*/
-	six = /(?<=\$500,000 to \$600,000 \=C2\=BB
+	six = /(?<=\$480,000 to \$580,000 \=C2\=BB
    <http:\/\/)[^>]*/
-	eight = /(?<=\$600,000 to \$800,000 \=C2\=BB
+	eight = /(?<=\$580,000 to \$700,000 \=C2\=BB
    <http:\/\/)[^>]*/
-	infinite = /(?<=Over \$800,000 \=C2\=BB
+	nine = /(?<=\$700,000 to \$1,000,000 \=C2\=BB
+   <http:\/\/)[^>]*/
+	infinite = /(?<=Over \$1,000,000 \=C2\=BB
    <http:\/\/)[^>]*/
 
 	urls = []
-	urls << clean(four,note) << clean(five,note) << clean(six,note) << clean(eight,note) << clean(infinite,note)
+	urls << clean(four,note) << clean(five,note) << clean(six,note) << clean(eight,note) << clean(nine,note) << clean(infinite,note)
 
 gmail.logout
 
