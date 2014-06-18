@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+every 3.minutes do
+  rake "fetch_prices", :environment => 'production'
+end
+
 every 1.day, :at => '10:00 am' do
   rake "fetch_prices", :environment => 'development'
 end
