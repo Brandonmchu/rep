@@ -19,8 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 3.minutes do
-  rake "fetch_sales", :environment => 'production'
+every 3.hours do
+  rake "fetch_sales", :environment => 'development'
 end
 
 every 1.day, :at => '10:00 am' do
