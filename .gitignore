@@ -17,3 +17,6 @@
 
 # Ignore all logfiles and tempfiles.
 .env
+
+# Ignore my config.json file
+sftp-config.json
