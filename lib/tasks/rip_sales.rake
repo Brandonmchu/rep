@@ -18,10 +18,12 @@ gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
 
 gmail.logout
 
+	#regex the body so that we can use Nokogiri to parse the dom
 	html_section = /(<!(.|\s)*html>)/
 	note = note.match(html_section)[0].gsub("=\n",'').gsub("3D","").gsub("CL",'CL_CF')
 	html_doc = Nokogiri::HTML(note)
 	
+	#build array of urls with listings
 	html_doc.search('//h3[text()="All GTA"]/following-sibling::ul[1]/li/a/@href').each do |url|
 		url = url.text
 		url << "&t=l&fm=M"
@@ -29,12 +31,15 @@ gmail.logout
 		urls << url 
 	end
 
-	puts urls
-
+	#parse each url, validate, and save to db
 	urls.each do |url|
+
 		doc = Nokogiri::HTML(open(url))
+
 		listings = doc.css("table")
+
 		listings.each do |listing|
+			
 			if listing.attr("border") == "1"
 				
 				images = listing.at_css("tr td script") 
@@ -53,6 +58,19 @@ gmail.logout
 						end
 						image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
 				end
+
+				#yes it's ugly, I know.
+				rooms = listing.at_css("tr[2] td tr[2] td[5]").text.strip
+				dens = 0
+				bedrooms = 0
+				if rooms.include? "+"
+					rooms = rooms.split("+")
+					dens = rooms[1].to_i
+					bedrooms = rooms[0].to_i
+				else
+					bedrooms = rooms
+				end
+
 				sale = {
 					address: listing.at_css("tr[1] td[2] tr td").text.strip,
 					listprice: listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").to_i,
@@ -67,7 +85,8 @@ gmail.logout
 					rooms: listing.at_css("tr[2] td tr td[5]").text.strip, 
 					stories: listing.at_css("tr[2] td tr[2] td").text.strip, 
 					acreage: listing.at_css("tr[2] td tr[2] td[3]").text.strip, 
-					bedrooms: listing.at_css("tr[2] td tr[2] td[5]").text.strip,	 
+					bedrooms: bedrooms,
+					dens: dens,	 
 					lot: listing.at_css("tr[2] td tr[4] td[2]").text.strip, 
 					mls: listing.at_css("tr[3] td tr td").text.strip.gsub(/\p{Space}/,''), 
 					kitchens: listing.at_css("tr[4] td tr td").text.strip,
@@ -82,12 +101,15 @@ gmail.logout
 					image_urls: image_urls,
 					image_descriptions: image_descriptions
 				}
+
 				@sale = Sale.new(sale)
+
 				if @sale.save
 					puts "saved correctly - "+sale[:address]
 				else
 					puts "did not save due to error - "+sale[:address]+@sale.errors.full_messages[0]
 				end
+
 			end
 		end	
 	end

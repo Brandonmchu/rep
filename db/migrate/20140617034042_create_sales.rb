@@ -2,9 +2,9 @@ class CreateSales < ActiveRecord::Migration
   def change
     create_table :sales do |t|
       t.string :address
-      t.string :listprice
-      t.string :soldprice
-      t.string :original_price
+      t.integer :listprice
+      t.integer :soldprice
+      t.integer :original_price
       t.string :taxes
       t.string :days_market
       t.string :date_list
@@ -14,8 +14,9 @@ class CreateSales < ActiveRecord::Migration
       t.string :rooms
       t.string :stories
       t.string :acreage
-      t.string :bedrooms
-	  t.string :lot
+      t.integer :bedrooms
+      t.integer :dens
+	    t.string :lot
       t.string :mls
       t.string :kitchens
       t.string :fam_rm
