@@ -3,11 +3,6 @@ task :fetch_sales => :environment do
 
 require 'open-uri'
 
-# def clean(range, note)
-# 	node = note.match range
-# 	node[0].gsub("3D","").sub("CL",'CL_CF') << "&t=l&fm=M"
-# end
-
 gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
 	
 	# get body of email from gmail
@@ -27,7 +22,6 @@ gmail.logout
 	html_doc.search('//h3[text()="All GTA"]/following-sibling::ul[1]/li/a/@href').each do |url|
 		url = url.text
 		url << "&t=l&fm=M"
-		puts url.class
 		urls << url 
 	end
 
@@ -86,7 +80,8 @@ gmail.logout
 					stories: listing.at_css("tr[2] td tr[2] td").text.strip, 
 					acreage: listing.at_css("tr[2] td tr[2] td[3]").text.strip, 
 					bedrooms: bedrooms,
-					dens: dens,	 
+					dens: dens,
+					washrooms: listing.at_css("tr[2] td tr[3] td[4]").text.strip,	 
 					lot: listing.at_css("tr[2] td tr[4] td[2]").text.strip, 
 					mls: listing.at_css("tr[3] td tr td").text.strip.gsub(/\p{Space}/,''), 
 					kitchens: listing.at_css("tr[4] td tr td").text.strip,

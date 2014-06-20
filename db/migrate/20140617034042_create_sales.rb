@@ -16,6 +16,7 @@ class CreateSales < ActiveRecord::Migration
       t.string :acreage
       t.integer :bedrooms
       t.integer :dens
+      t.integer :washrooms
 	    t.string :lot
       t.string :mls
       t.string :kitchens
