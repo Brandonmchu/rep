@@ -3,17 +3,18 @@ task :fetch_sales => :environment do
 
 require 'open-uri'
 
-gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
-	
+	# connect to Gmail
+	gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
 	# get body of email from gmail
 	# add :unread to emails(...) to get only the unread one
 	urls = []
 	mail = gmail.inbox.emails(:from => "sold.watch@gmail.com", :subject => "Toronto Real Estate Sold")
 	note = mail.last.body
 
-gmail.logout
+	# log out of gmail
+	gmail.logout
 
-	#regex the body so that we can use Nokogiri to parse the dom
+	#regex the email only for the html_section of the email, then use Nokogiri to parse, replacing some odd characters
 	html_section = /(<!(.|\s)*html>)/
 	note = note.match(html_section)[0].gsub("=\n",'').gsub("3D","").gsub("CL",'CL_CF')
 	html_doc = Nokogiri::HTML(note)
@@ -25,18 +26,21 @@ gmail.logout
 		urls << url 
 	end
 
-	#parse each url, validate, and save to db
+	#open each url, identify the details of each listing, parse details and save to db
 	urls.each do |url|
 
 		doc = Nokogiri::HTML(open(url))
-
+		#parse for the table of listings
 		listings = doc.css("table")
 
 		listings.each do |listing|
-			
+			# if an border = 1 then we have a listing
 			if listing.attr("border") == "1"
 				
+				# locate images
 				images = listing.at_css("tr td script") 
+
+				# regex for all image links and descriptions
 				all_links_regex = /(?<=pixArray = new Array\()[^\)]*/
 				parsed_links_regex = /(?<=,|^)'\K[^?]+/
 				image_descriptions_regex = /(?<=commArray = new Array\()[^\)]*/
@@ -53,18 +57,61 @@ gmail.logout
 						image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
 				end
 
-				#yes it's ugly, I know.
-				rooms = listing.at_css("tr[2] td tr[2] td[5]").text.strip
+				#parse dates into date objects so that they can be injected into database
+				date_list = listing.at_css("tr[1] td[2] table[3] tr td[6]").text.strip
+				date_sold = listing.at_css("tr[1] td[2] table[3] tr td[8]").text.strip
+				date_list = Date.strptime(date_list,'%m/%d/%Y')
+				date_sold = Date.strptime(date_sold,'%m/%d/%Y')
+
+				#parse bedrooms to split it into bedrooms and dens
+				bedrooms_check = listing.at_css("tr[2] td tr[2] td[5]").text.strip
 				dens = 0
 				bedrooms = 0
-				if rooms.include? "+"
-					rooms = rooms.split("+")
-					dens = rooms[1].to_i
-					bedrooms = rooms[0].to_i
-				else
-					bedrooms = rooms
+				if bedrooms_check.include? "+"
+					bedrooms_check = bedrooms_check.split("+")
+					bedrooms = bedrooms_check[0].to_i
+					dens = bedrooms_check[1].to_i
+				elsif bedrooms_check != ""
+					bedrooms = bedrooms_check.to_i
 				end
 
+				#parse rooms to split it into rooms and plus_rooms
+				rooms_check = listing.at_css("tr[2] td tr td[5]").text.strip
+				rooms = 0
+				plus_rooms = 0
+				if rooms_check.include? "+"
+					rooms_check = rooms_check.split("+")
+					rooms = rooms_check[0].to_i
+					plus_rooms = rooms_check[1].to_i
+				elsif rooms_check != ""
+					rooms = rooms_check.to_i
+				end
+
+				# parse lot into dimensions
+				lot = listing.at_css("tr[2] td tr[4] td[2]").text.strip
+				lot_first_dimension = 0
+				lot_second_dimension = 0
+				lot_dimension_units = "Feet"
+				if lot.include? "X"
+					lot = lot.split("X")
+					lot_first_dimension = lot[0].match(/(\d+)/)[0].to_i
+					lot_second_dimension = lot[1].match(/(\d+)/)[0].to_i
+					lot_dimension_units = lot[1].match(/(\D\S*)/)[0]
+				else
+					puts "no lot dimensions: Lot is given as: " + lot
+				end
+
+				#parse garage into garage type and number of garages
+				gargae_type = "Not Available"
+				garages = 0
+				garage_details = listing.at_css("tr[4] td[2] tr[4] td").text.strip
+				if garage_details.include? "/"
+					garage_details = garage_details.split("/")
+					garage_type = garage_details[0]
+					garages = garage_details[1]
+				end
+
+				#sale hash
 				sale = {
 					address: listing.at_css("tr[1] td[2] tr td").text.strip,
 					listprice: listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").to_i,
@@ -72,17 +119,21 @@ gmail.logout
 					original_price: listing.at_css("tr[1] td[2] table[2] tr td").text.strip.gsub("$","").to_i, 
 					taxes: listing.at_css("tr[1] td[2] table[2] tr td[4]").text.strip.gsub("$","").gsub(",","")[0..-6].to_i,
 					days_market: listing.at_css("tr[1] td[2] table[3] tr td[4]").text.strip.to_i, 
-					date_list: listing.at_css("tr[1] td[2] table[3] tr td[6]").text.strip,
-					date_sold: listing.at_css("tr[1] td[2] table[3] tr td[8]").text.strip, 
+					date_list: date_list,
+					date_sold: date_sold, 
 					unit_type: listing.at_css("tr[2] td tr td").text.strip, 
 					fronting: listing.at_css("tr[2] td tr td[3]").text.strip, 
-					rooms: listing.at_css("tr[2] td tr td[5]").text.strip, 
+					rooms: rooms, 
+					plus_rooms: plus_rooms, 
 					stories: listing.at_css("tr[2] td tr[2] td").text.strip, 
 					acreage: listing.at_css("tr[2] td tr[2] td[3]").text.strip, 
 					bedrooms: bedrooms,
 					dens: dens,
 					washrooms: listing.at_css("tr[2] td tr[3] td[4]").text.strip,	 
-					lot: listing.at_css("tr[2] td tr[4] td[2]").text.strip, 
+					lot_first_dimension: lot_first_dimension,
+					lot_second_dimension: lot_second_dimension,
+					lot_dimension_units: lot_dimension_units,
+					lot_square_footage: lot_first_dimension*lot_second_dimension,
 					mls: listing.at_css("tr[3] td tr td").text.strip.gsub(/\p{Space}/,''), 
 					kitchens: listing.at_css("tr[4] td tr td").text.strip,
 					fam_rm: listing.at_css("tr[4] td tr[2] td").text.strip,
@@ -90,7 +141,8 @@ gmail.logout
 					fireplace: listing.at_css("tr[4] td tr[5] td").text.strip,
 					sq_foot: listing.at_css("tr[4] td tr[10] td").text.strip,
 					mutual: listing.at_css("tr[4] td[2] tr[3] td").text.strip,
-					garage_type: listing.at_css("tr[4] td[2] tr[4] td").text.strip,
+					garage_type: garage_type,
+					garages: garages,
 					parking_spaces: listing.at_css("tr[4] td[2] tr[5] td").text.strip,
 					pool: listing.at_css("tr[4] td[2] tr[7] td").text.strip,
 					image_urls: image_urls,
@@ -99,10 +151,8 @@ gmail.logout
 
 				@sale = Sale.new(sale)
 
-				if @sale.save
-					puts "saved correctly - "+sale[:address]
-				else
-					puts "did not save due to error - "+sale[:address]+@sale.errors.full_messages[0]
+				unless @sale.save
+					puts "Error: "+ @sale.errors.full_messages[0] + ": " + sale[:address]
 				end
 
 			end
