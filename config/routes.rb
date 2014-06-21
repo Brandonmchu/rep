@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+
+  get 'sales/index'
+
+constraints subdomain: 'api' do
+  namespace :api, path: '/' do 
+    resources :sales
+    resources :houses
+    resources :non_houses
+  end
+end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
