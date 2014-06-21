@@ -1,9 +1,9 @@
-def save_sale(listing, address, address_two)
+def save_sale(listing, address, address_two, property)
 	
 	#sale hash variables
-	list_price = listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").to_i
-	sold_price = listing.at_css("tr[1] td[2] tr td[3]").text.strip.gsub("$","").to_i
-	original_price = listing.at_css("tr[1] td[2] table[2] tr td").text.strip.gsub("$","").to_i
+	list_price = listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").gsub(",","").to_i
+	sold_price = listing.at_css("tr[1] td[2] tr td[3]").text.strip.gsub("$","").gsub(",","").to_i
+	original_price = listing.at_css("tr[1] td[2] table[2] tr td").text.strip.gsub("$","").gsub(",","").to_i
 	taxes = listing.at_css("tr[1] td[2] table[2] tr td[4]").text.strip.gsub("$","").gsub(",","")[0..-6].to_i
 	days_on_market = listing.at_css("tr[1] td[2] table[3] tr td[4]").text.strip.to_i
 	spis = listing.at_css("tr[1] td[2] table[3] tr td[2]").text.strip
@@ -13,6 +13,14 @@ def save_sale(listing, address, address_two)
 	list_date = Date.strptime(list_date,'%m/%d/%Y')
 	sold_date = Date.strptime(sold_date,'%m/%d/%Y')
 
+
+	if property.class.name == "House"
+		house_id = property.id
+		non_house_id = 0
+	else
+		house_id = 0
+		non_house_id = property.id	
+	end
 	#sale hash
 	sale = {
 		address: address,
@@ -24,12 +32,14 @@ def save_sale(listing, address, address_two)
 		days_on_market: days_on_market,
 		spis: spis,
 		list_date: list_date,
-		sold_date: sold_date 
-		
+		sold_date: sold_date,
+		house_id: property.id,
+		non_house_id: non_house_id	 
 	}
 
 	@sale = Sale.new(sale)
 	unless @sale.save
-#		puts "Error: "+ @sale.errors.full_messages[0] + ": " + sale[:address]
+		puts "Error: "+@sale.class.name+" "+@sale.errors.full_messages[0] + ": " + sale[:address]
 	end
+
 end

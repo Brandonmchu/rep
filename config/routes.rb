@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  get 'houses/show'
+
+  # namespace :api, path: '/', constraints: {subdomain: 'api'} do
+    resources :sales
+    resources :houses
+    resources :non_houses
+  # end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
