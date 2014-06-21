@@ -40,15 +40,16 @@ require './lib/tasks/sale_parser'
 			if listing.attr("border") == "1"
 
 				address = listing.at_css("tr[1] td[2] tr td").text.strip
+				address_two = listing.at_css("tr[1] td[2] tr[2] td").text.strip
 
 				lot = listing.at_css("tr[2] td tr[4] th[1]").text.strip
 				if lot == "Lot:"
-					parse_house(listing, address)
+					parse_house(listing, address, address_two)
 				else
 					puts "Not a house!"
 				end
 
-				save_sale(listing, address)
+				save_sale(listing, address, address_two)
 
 
 				#find out if house or non_house and then pass to parsing functions

@@ -1,4 +1,4 @@
-def save_sale(listing, address)
+def save_sale(listing, address, address_two)
 	
 	#sale hash variables
 	list_price = listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").to_i
@@ -16,6 +16,7 @@ def save_sale(listing, address)
 	#sale hash
 	sale = {
 		address: address,
+		address_two: address_two,
 		list_price: list_price,
 		sold_price: sold_price,
 		original_price: original_price, 

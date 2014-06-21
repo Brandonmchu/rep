@@ -2,6 +2,7 @@ class CreateSales < ActiveRecord::Migration
   def change
     create_table :sales do |t|
       t.string :address
+      t.string :address_two
       t.integer :list_price
       t.integer :sold_price
       t.integer :original_price
