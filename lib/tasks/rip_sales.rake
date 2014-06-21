@@ -3,6 +3,7 @@ task :fetch_sales => :environment do
 
 require 'open-uri'
 require './lib/tasks/house_parser'
+require './lib/tasks/non_house_parser'
 require './lib/tasks/sale_parser'
 
 	# connect to Gmail
@@ -45,7 +46,7 @@ require './lib/tasks/sale_parser'
 				if lot == "Lot:"
 					parse_house(listing, address)
 				else
-					puts "Not a house!"
+					parse_non_house(listing,address)
 				end
 
 				save_sale(listing, address)

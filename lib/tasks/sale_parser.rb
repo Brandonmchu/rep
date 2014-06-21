@@ -29,6 +29,6 @@ def save_sale(listing, address)
 
 	@sale = Sale.new(sale)
 	unless @sale.save
-		puts "Error: "+ @sale.errors.full_messages[0] + ": " + sale[:address]
+#		puts "Error: "+ @sale.errors.full_messages[0] + ": " + sale[:address]
 	end
 end

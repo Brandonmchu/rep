@@ -138,7 +138,7 @@ def parse_house(listing, address)
 	def save_house(house)
 		@house = House.new(house)
 		unless @house.save
-			puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
+#			puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
 		end					
 	end
 
