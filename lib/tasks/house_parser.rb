@@ -1,4 +1,4 @@
-def parse_house(listing, address)
+def parse_house(listing, address, address_two)
 
 	lot = listing.at_css("tr[2] td tr[4] td[2]").text.strip
 	lot_first_dimension = 0
@@ -104,6 +104,7 @@ def parse_house(listing, address)
 
 	house = {
 		address: address,
+		address_two: address_two,
 		unit_type: unit_type, 
 		fronting: fronting, 
 		rooms: rooms, 

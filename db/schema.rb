@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20140621161403) do
 
   create_table "houses", force: true do |t|
     t.string   "address"
+    t.string   "address_two"
     t.string   "unit_type"
     t.string   "fronting"
     t.integer  "rooms"
@@ -50,6 +51,8 @@ ActiveRecord::Schema.define(version: 20140621161403) do
   end
 
   create_table "non_houses", force: true do |t|
+    t.string   "address"
+    t.string   "address_two"
     t.string   "unit_type"
     t.integer  "rooms"
     t.integer  "plus_rooms"
@@ -57,7 +60,6 @@ ActiveRecord::Schema.define(version: 20140621161403) do
     t.integer  "dens"
     t.integer  "washrooms"
     t.string   "corp"
-    t.string   "address"
     t.string   "prop_mgmt"
     t.integer  "kitchens"
     t.string   "fam_rm"
@@ -95,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140621161403) do
 
   create_table "sales", force: true do |t|
     t.string   "address"
+    t.string   "address_two"
     t.integer  "list_price"
     t.integer  "sold_price"
     t.integer  "original_price"
