@@ -85,7 +85,7 @@ def parse_non_house(listing, address)
 	# parse amenities
 	total_rows = listing.search("tr[4]/td[3]/table/tr").size
 	amenities = ""
-	if total_rows = 12
+	if total_rows == 12
 		amenities = listing.at_css("tr[4] td[3] tr[12] td").text.strip
 	elsif total_rows > 12
 		amenities = listing.at_css("tr[4] td[3] tr[12] td").text.strip
