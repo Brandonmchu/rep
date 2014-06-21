@@ -1,4 +1,5 @@
 class SalesController < ApplicationController
+
   def index
   	@sales = Sale.all
 	render :json => @sales
@@ -8,4 +9,5 @@ class SalesController < ApplicationController
   	@sale = Sale.find_by_id(params[:id])
   	render :json => @sale
   end
+
 end

@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621161403) do
+ActiveRecord::Schema.define(version: 20140621213936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "houses", force: true do |t|
     t.string   "address"
+    t.string   "address_two"
     t.string   "unit_type"
     t.string   "fronting"
     t.integer  "rooms"
@@ -95,6 +96,7 @@ ActiveRecord::Schema.define(version: 20140621161403) do
 
   create_table "sales", force: true do |t|
     t.string   "address"
+    t.string   "address_two"
     t.integer  "list_price"
     t.integer  "sold_price"
     t.integer  "original_price"
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20140621161403) do
     t.date     "sold_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "house_id"
   end
 
 end
