@@ -33,12 +33,13 @@ def save_sale(listing, address, address_two, property)
 		spis: spis,
 		list_date: list_date,
 		sold_date: sold_date,
-		house_id: property.id	 
+		house_id: property.id,
+		non_house_id: non_house_id	 
 	}
 
 	@sale = Sale.new(sale)
 	unless @sale.save
-		puts "Error: "+ @sale.errors.full_messages[0] + ": " + sale[:address]
+		puts "Error: "+@sale.class.name+" "+@sale.errors.full_messages[0] + ": " + sale[:address]
 	end
 
 end

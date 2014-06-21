@@ -141,8 +141,5 @@ def parse_house(listing, address, address_two)
 		puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
 		save_sale(listing, address, address_two, existing_house)					
 	end
-	
-	save_sale(listing, address, address_two, @house)					
-
 
 end
