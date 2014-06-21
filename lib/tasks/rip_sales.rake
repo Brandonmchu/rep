@@ -48,7 +48,7 @@ require './lib/tasks/sale_parser'
 				if lot == "Lot:"
 					parse_house(listing, address, address_two)
 				else
-					parse_non_house(listing,address)
+					parse_non_house(listing,address, address_two)
 				end
 
 			end
