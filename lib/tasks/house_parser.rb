@@ -100,8 +100,6 @@ def parse_house(listing, address, address_two)
 	image_descriptions = image_descriptions
 	description = listing.at_css("tr[6] table").text.strip
 
-
-
 	house = {
 		address: address,
 		address_two: address_two,
@@ -134,15 +132,17 @@ def parse_house(listing, address, address_two)
 		description: description,
 	}
 
-
-
-	def save_house(house)
-		@house = House.new(house)
-		unless @house.save
-			puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
-		end					
+	@house = House.new(house)
+	
+	if @house.save
+		save_sale(listing, address, address_two, @house)					
+	else 
+		existing_house = House.find_by_address(@house.address)
+		puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
+		save_sale(listing, address, address_two, existing_house)					
 	end
+	
+	save_sale(listing, address, address_two, @house)					
 
-	save_house(house)
 
 end

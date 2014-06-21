@@ -4,4 +4,5 @@ class Sale < ActiveRecord::Base
 	validates :address, uniqueness: {scope: :sold_date}
 
 	belongs_to :house
+	belongs_to :non_houses
 end

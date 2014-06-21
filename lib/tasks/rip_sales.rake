@@ -49,7 +49,7 @@ require './lib/tasks/sale_parser'
 					puts "Not a house!"
 				end
 
-				save_sale(listing, address, address_two)
+				# save_sale(listing, address, address_two)
 
 
 				#find out if house or non_house and then pass to parsing functions

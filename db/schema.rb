@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621213936) do
+ActiveRecord::Schema.define(version: 20140621221747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,6 @@ ActiveRecord::Schema.define(version: 20140621213936) do
   end
 
   create_table "non_houses", force: true do |t|
-    t.string   "address"
-    t.string   "address_two"
     t.string   "unit_type"
     t.integer  "rooms"
     t.integer  "plus_rooms"
@@ -60,6 +58,7 @@ ActiveRecord::Schema.define(version: 20140621213936) do
     t.integer  "dens"
     t.integer  "washrooms"
     t.string   "corp"
+    t.string   "address"
     t.string   "prop_mgmt"
     t.integer  "kitchens"
     t.string   "fam_rm"
@@ -109,6 +108,7 @@ ActiveRecord::Schema.define(version: 20140621213936) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "house_id"
+    t.integer  "non_house_id"
   end
 
 end
