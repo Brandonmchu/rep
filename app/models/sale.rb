@@ -1,6 +1,6 @@
 class Sale < ActiveRecord::Base
 
-	validates :address, :date_sold, :soldprice, :listprice, presence: true
-	validates :address, uniqueness: {scope: :date_sold}
+	validates :address, :sold_date, :sold_price, :list_price, presence: true
+	validates :address, uniqueness: {scope: :sold_date}
 
 end
