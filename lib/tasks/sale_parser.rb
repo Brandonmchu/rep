@@ -1,9 +1,9 @@
 def save_sale(listing, address, address_two)
 	
 	#sale hash variables
-	list_price = listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").to_i
-	sold_price = listing.at_css("tr[1] td[2] tr td[3]").text.strip.gsub("$","").to_i
-	original_price = listing.at_css("tr[1] td[2] table[2] tr td").text.strip.gsub("$","").to_i
+	list_price = listing.at_css("tr[1] td[2] tr td[2]").text.strip.gsub("$","").gsub(",","").to_i
+	sold_price = listing.at_css("tr[1] td[2] tr td[3]").text.strip.gsub("$","").gsub(",","").to_i
+	original_price = listing.at_css("tr[1] td[2] table[2] tr td").text.strip.gsub("$","").gsub(",","").to_i
 	taxes = listing.at_css("tr[1] td[2] table[2] tr td[4]").text.strip.gsub("$","").gsub(",","")[0..-6].to_i
 	days_on_market = listing.at_css("tr[1] td[2] table[3] tr td[4]").text.strip.to_i
 	spis = listing.at_css("tr[1] td[2] table[3] tr td[2]").text.strip
