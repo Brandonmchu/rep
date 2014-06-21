@@ -166,7 +166,7 @@ def parse_non_house(listing, address)
 	def save_non_house(non_house)
 		@non_house = NonHouse.new(non_house)
 		unless @non_house.save
-#			puts "Error: "+ @non_house.errors.full_messages[0] + ": " + non_house[:address]
+			puts "Error: "+ @non_house.errors.full_messages[0] + ": " + non_house[:address]
 		end					
 	end
 
