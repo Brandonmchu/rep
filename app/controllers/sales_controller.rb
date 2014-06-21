@@ -1,10 +1,11 @@
 class SalesController < ApplicationController
   def index
   	@sales = Sale.all
-  	 respond_to do |format|
-      format.html
-      format.xml { render :xml => @sales }
-      format.json { render :json => @sales }
-    end
+	render :json => @sales
+  end
+
+  def show
+  	@sale = Sale.find_by_id(params[:id])
+  	render :json => @sale
   end
 end
