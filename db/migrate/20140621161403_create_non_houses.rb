@@ -40,7 +40,9 @@ class CreateNonHouses < ActiveRecord::Migration
 		t.integer :park_spaces
 		t.integer :park_cost
 		t.string :amenities
+  	  	t.string :image_urls, array: true, default: '{}'
 		t.text :description
+
       t.timestamps
     end
   end

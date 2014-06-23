@@ -29,7 +29,6 @@ class CreateHouses < ActiveRecord::Migration
   	  t.string :pool
   	  t.text :description
   	  t.string :image_urls, array: true, default: '{}'
-  	  t.string :image_descriptions, array: true, default: '{}'
       t.timestamps
     end
   end

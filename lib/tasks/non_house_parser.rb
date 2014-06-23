@@ -1,35 +1,5 @@
-def parse_non_house(listing, address)
+def parse_non_house(listing, address, address_two)
 
-
-	unit_type = listing.at_css("tr[2] td tr td").text.strip 
-	washrooms = listing.at_css("tr[2] td tr[3] td[6]").text.strip
-	corp = listing.at_css("tr[2] td tr[4] td[2]").text.strip
-	prop_mgmt =  listing.at_css("tr[5] td").text.strip.gsub(/Prop Mgmt:\S/,"")
-	kitchens = listing.at_css("tr[4] td tr td").text.strip
-	fam_rm = listing.at_css("tr[4] td tr[2] td").text.strip
-	apx_age = listing.at_css("tr[4] td tr[8] td").text.strip
-	exposure = listing.at_css("tr[4] td tr[10] td").text.strip
-	pets = listing.at_css("tr[4] td[2] tr[1] td").text.strip
-	locker = listing.at_css("tr[4] td[2] tr[2] td").text.strip
-	maintenance = listing.at_css("tr[4] td[2] tr[3] td").text.strip.gsub("$","").gsub(",","").to_i
-	level = listing.at_css("tr[2] td tr[3] td[4]").text.strip	 	
-	unit_number = listing.at_css("tr[2] td tr[4] td[4]").text.strip
-	air_con = listing.at_css("tr[4] td[2] tr[4] td").text.strip
-	incl_heat = listing.at_css("tr[4] td[2] tr[10] td").text.strip
-	incl_cabl = listing.at_css("tr[4] td[2] tr[11] td").text.strip
-	incl_cac = listing.at_css("tr[4] td[2] tr[11] td[4]").text.strip
-	incl_insurance = listing.at_css("tr[4] td[2] tr[12] td").text.strip
-	incl_comm_elem = listing.at_css("tr[4] td[2] tr[13] td").text.strip
-	incl_water = listing.at_css("tr[4] td[2] tr[9] td[4]").text.strip
-	incl_hydro = listing.at_css("tr[4] td[2] tr[10] td[4]").text.strip
-	incl_parking = listing.at_css("tr[4] td[2] tr[12] td[4]").text.strip
-	balcony = listing.at_css("tr[4] td[3] tr[1] td").text.strip
-	ensuite_laundry = listing.at_css("tr[4] td[3] tr[2] td").text.strip
-	laundry_level = listing.at_css("tr[4] td[3] tr[2] td[4]").text.strip
-	park_method = listing.at_css("tr[4] td[3] tr[6] td").text.strip
-	park_type = listing.at_css("tr[4] td[3] tr[7] td").text.strip
-	park_cost = listing.at_css("tr[4] td[3] tr[9] td").text.strip.gsub("$","").gsub(",","").to_i
-	description = listing.at_css("tr[6] table").text.strip
 
 	#parse rooms to split it into rooms and plus_rooms
 	rooms_check = listing.at_css("tr[2] td tr td[5]").text.strip
@@ -76,7 +46,7 @@ def parse_non_house(listing, address)
 
 	# parse parking spaces
 	park_spaces = listing.at_css("tr[4] td[3] tr[8] td").text.strip
-	if /(\d+)/.match(park_space).nil?
+	if /(\d+)/.match(park_spaces).nil?
 		park_spaces = 0
 	else
 		park_spaces = park_spaces.match(/(\d+)/)[0].to_i
@@ -117,8 +87,41 @@ def parse_non_house(listing, address)
 			image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
 	end
 
-
+	#declare all variables to be put into non-house hash
+	unit_type = listing.at_css("tr[2] td tr td").text.strip 
+	washrooms = listing.at_css("tr[2] td tr[3] td[6]").text.strip
+	corp = listing.at_css("tr[2] td tr[4] td[2]").text.strip
+	prop_mgmt =  listing.at_css("tr[5] td").text.strip.gsub(/Prop Mgmt:\S/,"")
+	kitchens = listing.at_css("tr[4] td tr td").text.strip
+	fam_rm = listing.at_css("tr[4] td tr[2] td").text.strip
+	apx_age = listing.at_css("tr[4] td tr[8] td").text.strip
+	exposure = listing.at_css("tr[4] td tr[10] td").text.strip
+	pets = listing.at_css("tr[4] td[2] tr[1] td").text.strip
+	locker = listing.at_css("tr[4] td[2] tr[2] td").text.strip
+	maintenance = listing.at_css("tr[4] td[2] tr[3] td").text.strip.gsub("$","").gsub(",","").to_i
+	level = listing.at_css("tr[2] td tr[3] td[4]").text.strip	 	
+	unit_number = listing.at_css("tr[2] td tr[4] td[4]").text.strip
+	air_con = listing.at_css("tr[4] td[2] tr[4] td").text.strip
+	incl_heat = listing.at_css("tr[4] td[2] tr[10] td").text.strip
+	incl_cable = listing.at_css("tr[4] td[2] tr[11] td").text.strip
+	incl_cac = listing.at_css("tr[4] td[2] tr[11] td[4]").text.strip
+	incl_insurance = listing.at_css("tr[4] td[2] tr[12] td").text.strip
+	incl_comm_elem = listing.at_css("tr[4] td[2] tr[13] td").text.strip
+	incl_water = listing.at_css("tr[4] td[2] tr[9] td[4]").text.strip
+	incl_hydro = listing.at_css("tr[4] td[2] tr[10] td[4]").text.strip
+	incl_parking = listing.at_css("tr[4] td[2] tr[12] td[4]").text.strip
+	balcony = listing.at_css("tr[4] td[3] tr[1] td").text.strip
+	ensuite_laundry = listing.at_css("tr[4] td[3] tr[2] td").text.strip
+	laundry_level = listing.at_css("tr[4] td[3] tr[2] td[4]").text.strip
+	park_method = listing.at_css("tr[4] td[3] tr[6] td").text.strip
+	park_type = listing.at_css("tr[4] td[3] tr[7] td").text.strip
+	park_cost = listing.at_css("tr[4] td[3] tr[9] td").text.strip.gsub("$","").gsub(",","").to_i
+	description = listing.at_css("tr[6] table").text.strip
+	image_urls = image_urls
+	
 	non_house = {
+		address: address,
+		address_two: address_two,
 		unit_type: unit_type, 
 		rooms: rooms, 
 		plus_rooms: plus_rooms, 
@@ -126,8 +129,6 @@ def parse_non_house(listing, address)
 		dens: dens,
 		washrooms: washrooms,	 
 		corp: corp,
-		address: address,
-		address_two: address_two,
 		prop_mgmt: prop_mgmt,
 		kitchens: kitchens,
 		fam_rm: fam_rm,
@@ -142,7 +143,7 @@ def parse_non_house(listing, address)
 		maintenance: maintenance,
 		air_con: air_con,
 		incl_heat: incl_heat,
-		incl_cabl: incl_cabl,
+		incl_cable: incl_cable,
 		incl_insurance: incl_insurance,
 		incl_comm_elem: incl_comm_elem,
 		incl_water: incl_water,
@@ -158,18 +159,18 @@ def parse_non_house(listing, address)
 		park_spaces: park_spaces,
 		park_cost: park_cost,
 		amenities: amenities,
-		description: description,
 		image_urls: image_urls,
-		image_descriptions: image_descriptions,
+		description: description,
 	}
 
-	def save_non_house(non_house)
-		@non_house = NonHouse.new(non_house)
-		unless @non_house.save
-			puts "Error: "+ @non_house.errors.full_messages[0] + ": " + non_house[:address]
-		end					
+	@non_house = NonHouse.new(non_house)
+	
+	if @non_house.save
+		save_sale(listing, address, address_two, @non_house)					
+	else 
+		existing_non_house = NonHouse.find_by_address(@non_house.address)
+		puts "CONDO Error: "+ @non_house.errors.full_messages[0] + ": " + non_house[:address]
+		save_sale(listing, address, address_two, existing_non_house)					
 	end
-
-	save_non_house(non_house)
 
 end

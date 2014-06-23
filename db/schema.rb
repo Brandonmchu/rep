@@ -45,12 +45,13 @@ ActiveRecord::Schema.define(version: 20140621221747) do
     t.string   "pool"
     t.text     "description"
     t.string   "image_urls",           default: [], array: true
-    t.string   "image_descriptions",   default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "non_houses", force: true do |t|
+    t.string   "address"
+    t.string   "address_two"
     t.string   "unit_type"
     t.integer  "rooms"
     t.integer  "plus_rooms"
@@ -58,7 +59,6 @@ ActiveRecord::Schema.define(version: 20140621221747) do
     t.integer  "dens"
     t.integer  "washrooms"
     t.string   "corp"
-    t.string   "address"
     t.string   "prop_mgmt"
     t.integer  "kitchens"
     t.string   "fam_rm"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140621221747) do
     t.integer  "park_spaces"
     t.integer  "park_cost"
     t.string   "amenities"
+    t.string   "image_urls",        default: [], array: true
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

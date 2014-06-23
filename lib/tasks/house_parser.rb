@@ -75,6 +75,7 @@ def parse_house(listing, address, address_two)
 		rooms = rooms_check.to_i
 	end
 
+	#declare all variables to be put into house hash
 	plus_rooms = plus_rooms 
 	stories = listing.at_css("tr[2] td tr[2] td").text.strip 
 	acreage = listing.at_css("tr[2] td tr[2] td[3]").text.strip 
@@ -97,7 +98,6 @@ def parse_house(listing, address, address_two)
 	parking_spaces = listing.at_css("tr[4] td[2] tr[5] td").text.strip
 	pool = listing.at_css("tr[4] td[2] tr[7] td").text.strip
 	image_urls = image_urls
-	image_descriptions = image_descriptions
 	description = listing.at_css("tr[6] table").text.strip
 
 	house = {
@@ -128,7 +128,6 @@ def parse_house(listing, address, address_two)
 		parking_spaces: parking_spaces,
 		pool: pool,
 		image_urls: image_urls,
-		image_descriptions: image_descriptions,
 		description: description,
 	}
 
@@ -138,7 +137,7 @@ def parse_house(listing, address, address_two)
 		save_sale(listing, address, address_two, @house)					
 	else 
 		existing_house = House.find_by_address(@house.address)
-		puts "Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
+		puts "HOUSE Error: "+ @house.errors.full_messages[0] + ": " + house[:address]
 		save_sale(listing, address, address_two, existing_house)					
 	end
 
