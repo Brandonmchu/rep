@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'non_houses/show'
+
   get 'houses/show'
 
   # namespace :api, path: '/', constraints: {subdomain: 'api'} do
