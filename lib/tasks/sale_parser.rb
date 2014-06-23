@@ -33,7 +33,7 @@ def save_sale(listing, address, address_two, property)
 		spis: spis,
 		list_date: list_date,
 		sold_date: sold_date,
-		house_id: property.id,
+		house_id: house_id,
 		non_house_id: non_house_id	 
 	}
 

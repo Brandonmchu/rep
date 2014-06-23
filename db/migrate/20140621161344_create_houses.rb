@@ -3,7 +3,7 @@ class CreateHouses < ActiveRecord::Migration
     create_table :houses do |t|
       t.string :address
       t.string :address_two
-	  t.string :unit_type
+	    t.string :unit_type
       t.string :fronting
       t.integer :rooms
       t.integer :plus_rooms
@@ -12,7 +12,7 @@ class CreateHouses < ActiveRecord::Migration
       t.integer :bedrooms
       t.integer :dens
       t.integer :washrooms
-	  t.integer :lot_first_dimension
+	    t.integer :lot_first_dimension
       t.integer :lot_second_dimension
       t.string :lot_dimension_units
       t.integer :lot_square_footage

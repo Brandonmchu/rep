@@ -6,7 +6,7 @@ class CreateSales < ActiveRecord::Migration
       t.integer :list_price
       t.integer :sold_price
       t.integer :original_price
-      t.string :taxes
+      t.integer :taxes
       t.integer :days_on_market
       t.string :spis
       t.date :list_date
