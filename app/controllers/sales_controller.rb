@@ -7,7 +7,11 @@ class SalesController < ApplicationController
 
   def show
   	@sale = Sale.find_by_id(params[:id])
-  	render :json => @sale
+  	if @sale.house_id != 0
+  		render :json => @sale.to_json(:include => :house)
+  	else
+  		render :json => @sale.to_json(:include => :non_house)
+  	end
   end
 
 end
