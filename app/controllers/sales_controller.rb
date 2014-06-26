@@ -14,4 +14,10 @@ class SalesController < ApplicationController
   	end
   end
 
+  def proximity
+    @sales_near_by = Sale.find_by_sql ["SELECT * FROM sales s WHERE earth_box(ll_to_earth(?,?),?) @> ll_to_earth(s.latitude,s.longitude)",params[:latitude],params[:longitude],1000]    
+    render :json => @sales_near_by.to_json(:include => [:house,:non_house])
+  end
+
+
 end
