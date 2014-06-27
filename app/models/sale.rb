@@ -6,13 +6,13 @@ class Sale < ActiveRecord::Base
 	# geocoded_by :address, latitude: :start_latitude, longitude: :start_longitude
 	# geocoded_by :address_two, latitude: :end_latitude, longitude: :end_longitude
 
-	# geocoded_by :geo_address
-	# after_validation :geocode
+	geocoded_by :geoaddress
+	after_validation :geocode
 
 	belongs_to :house
 	belongs_to :non_house
 
-	# def geo_address
- #  		[:address, :address_two].compact.join(', ')
-	# end
+	def geoaddress
+  		[address, address_two].compact.join(', ')
+	end
 end
