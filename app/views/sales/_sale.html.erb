@@ -1,0 +1,18 @@
+<% @sales_near_by.each do |sale| %>
+	<tr>	
+		<td>
+		<% if sale.house_id == 0 %>
+			Condo
+		<% else %>
+			House
+		<% end %>
+		</td>
+		<td><%= sale.address %></td>
+		<td><%= sale.address_two %></td>
+		<td><%= sale.days_on_market %></td>
+		<td><%= sale.house.sq_foot %></td>
+		<td><%= sale.sold_price %></td>
+		<td><%= sale.list_price %></td>
+		<td><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f)*100) %></td>
+	</tr>
+<% end %>

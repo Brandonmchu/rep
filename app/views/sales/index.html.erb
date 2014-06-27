@@ -1,2 +1,21 @@
-<h1>Sales#index</h1>
-<p>Find me in app/views/sales/index.html.erb</p>
+<%= form_tag root_path, method: :get, remote: false do %>
+    <%= hidden_field_tag :latitude, 43.6485  %>
+    <%= hidden_field_tag :longitude, -79.3698  %>
+	<%= submit_tag "Find Sales Near Me"%>
+<% end %>
+
+<br /><h1>Sales Near By</h1>
+
+<table class="table table-striped tablesorter">
+	<tr>
+		<th>Type</th>
+		<th>Address</th>
+		<th>Address_two</th>
+		<th>DOM</th>
+		<th>SQFT</th>
+		<th>List Price</th>
+		<th>Sold Price</th>
+		<th>% of list</th>
+	</tr>
+<%= render 'sale', sales_near_by: @sales_near_by %>
+</table>
