@@ -1,8 +1,8 @@
 class SalesController < ApplicationController
 
   def index
-    # @sales_near_by = Sale.where(longitude: nil)
-    @sales_near_by = Sale.find_by_sql ["SELECT * FROM sales s WHERE earth_box(ll_to_earth(?,?),?) @> ll_to_earth(s.latitude,s.longitude)",params[:latitude],params[:longitude],1000]    
+    # @sales_near_by = Sale.where('longitude is NOT NULL')
+    @sales_near_by = Sale.find_by_sql ["SELECT * FROM sales s WHERE earth_box(ll_to_earth(?,?),?) @> ll_to_earth(s.latitude,s.longitude)",params[:latitude],params[:longitude],5000]    
     respond_to do |format|
       format.html
       format.js

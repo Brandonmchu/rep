@@ -2,13 +2,15 @@ source 'https://rubygems.org'
 
 gem 'pg'
 gem 'whenever'
-gem 'dotenv-rails', :groups => [:development, :test]
+gem 'dotenv-rails', :groups => [:development, :test, :production]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem "geocoder"
+
+gem 'jquery-rails'
 gem 'jquery-tablesorter'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -21,7 +23,7 @@ gem 'nokogiri'
 
 gem 'gmail', :path => 'vendor/gems/gmail-0.4.0'
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

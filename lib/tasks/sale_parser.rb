@@ -34,7 +34,9 @@ def save_sale(listing, address, address_two, property)
 		list_date: list_date,
 		sold_date: sold_date,
 		house_id: house_id,
-		non_house_id: non_house_id	 
+		non_house_id: non_house_id,
+		longitude: property.longitude,
+		latitude: property.latitude	 
 	}
 
 	@sale = Sale.new(sale)

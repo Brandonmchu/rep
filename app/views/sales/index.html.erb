@@ -1,21 +1,30 @@
-<%= form_tag root_path, method: :get, remote: false do %>
-    <%= hidden_field_tag :latitude, 43.6485  %>
-    <%= hidden_field_tag :longitude, -79.3698  %>
-	<%= submit_tag "Find Sales Near Me"%>
-<% end %>
+<h1 class="text-center">Toronto House Price Search</h1>
+<p class="text-center lead">Find recent house & condo sales near the address you search below</p>
 
-<br /><h1>Sales Near By</h1>
 
-<table class="table table-striped tablesorter">
-	<tr>
+	<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: false do %>
+			<div class="search-block">
+			<%= text_field_tag :address, "", class: 'form-control search-field', :placeholder => "Enter your Address" %>
+	    <%= hidden_field_tag :latitude, 43.6405081  %>
+	    <%= hidden_field_tag :longitude, -79.38070490000001  %>
+		<%= submit_tag "go", style: "display: none;" %>
+
+	<% end %>
+	<input type="button" value="Find Sales Near Me" onclick="codeAddress()" class="btn btn-success btn-inline search-button">
+		</div>
+
+
+<table id="myTable" class="table table-striped tablesorter">
+	<thead>
 		<th>Type</th>
 		<th>Address</th>
-		<th>Address_two</th>
-		<th>DOM</th>
-		<th>SQFT</th>
+		<th>Date Sold</th>
+		<th>Days on Market</th>
 		<th>List Price</th>
 		<th>Sold Price</th>
 		<th>% of list</th>
-	</tr>
-<%= render 'sale', sales_near_by: @sales_near_by %>
+	</thead>
+	<tbody>
+		<%= render 'sale', sales_near_by: @sales_near_by %>
+	</tbody>
 </table>

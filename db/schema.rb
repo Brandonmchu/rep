@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626003713) do
+ActiveRecord::Schema.define(version: 20140628192423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "houses", force: true do |t|
     t.string   "address"
@@ -47,6 +49,8 @@ ActiveRecord::Schema.define(version: 20140626003713) do
     t.string   "image_urls",           default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "non_houses", force: true do |t|
@@ -93,6 +97,8 @@ ActiveRecord::Schema.define(version: 20140626003713) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "sales", force: true do |t|
