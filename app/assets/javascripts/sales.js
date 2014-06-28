@@ -15,12 +15,13 @@ function initialize() {
 function codeAddress() {
   var address = document.getElementById("address").value;
   console.log(address)
+  address = address + "Ontario, Canada"
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       $("#latitude").val(results[0].geometry.location.k);
       $("#longitude").val(results[0].geometry.location.A);
       // $("#last_address").val(address)
-      // $("#search-form").submit();
+      $("#search-form").submit();
       // map.setCenter(results[0].geometry.location);
       // var marker = new google.maps.Marker({
       //     map: map,
@@ -58,7 +59,7 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
-        $("#myTable").tablesorter();
+        $("#searchResults").tablesorter();
         initialize(); 
     } 
 ); 

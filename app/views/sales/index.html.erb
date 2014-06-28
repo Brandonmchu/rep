@@ -2,7 +2,7 @@
 <p class="text-center lead">Find recent house & condo sales near the address you search below</p>
 
 
-	<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: false do %>
+	<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: true do %>
 			<div class="search-block">
 			<%= text_field_tag :address, "", class: 'form-control search-field', :placeholder => "Enter your Address" %>
 	    <%= hidden_field_tag :latitude, 43.6405081  %>
@@ -14,7 +14,7 @@
 		</div>
 
 
-<table id="myTable" class="table table-striped tablesorter">
+<table id="searchResults" class="table table-striped tablesorter">
 	<thead>
 		<th>Type</th>
 		<th>Address</th>
