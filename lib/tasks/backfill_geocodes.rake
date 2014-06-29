@@ -11,7 +11,7 @@ houses.each do |house|
 		sleep(1)
 		house.update!(latitude: coords[0], longitude: coords[1])
 		house.sales.each do |sale|
-			sale.update!(latitude: coords[0], longitude: coords[1])
+			sale.update!(latitude: house.latitude, longitude: house.longitude)
 		end
 	end
 end
@@ -26,7 +26,7 @@ non_houses.each do |non_house|
 		sleep(1)
 		non_house.update!(latitude: coords[0], longitude: coords[1])
 		non_house.sales.each do |sale|
-			sale.update!(latitude: coords[0], longitude: coords[1])
+			sale.update!(latitude: non_house.latitude, longitude: non_house.longitude)
 		end
 	end
 end
