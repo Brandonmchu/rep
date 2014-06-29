@@ -11,8 +11,9 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
+  config.consider_all_requests_local = ENV['CONSIDER_REQUESTS_LOCAL']
+  config.action_controller.perform_caching = false
+  config.action_view.debug_rjs = true
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
