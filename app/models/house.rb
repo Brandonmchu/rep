@@ -30,13 +30,3 @@ class House < ActiveRecord::Base
 	
 end
 
-# houses.each do |l|
-# 	if l.geocode == nil
-# 		sleep(1)
-# 		"niller"
-# 	else
-# 		coords = l.geocode
-# 		sleep(1)
-# 		l.update!(latitude: coords[0], longitude: coords[1])
-# 	end
-# end
