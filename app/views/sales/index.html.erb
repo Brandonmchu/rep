@@ -7,10 +7,9 @@
 			<%= text_field_tag :address, "", class: 'form-control search-field', :placeholder => "Enter your Address" %>
 	    <%= hidden_field_tag :latitude, 43.6405081  %>
 	    <%= hidden_field_tag :longitude, -79.38070490000001  %>
-		<%= submit_tag "go", style: "display: none;" %>
+			<%= submit_tag "Find Sales Near Me", onclick:"codeAddress()",class: "btn btn-success btn-inline search-button" %>
 
 	<% end %>
-	<input type="button" value="Find Sales Near Me" onclick="codeAddress()" class="btn btn-success btn-inline search-button">
 		</div>
 
 
@@ -19,7 +18,7 @@
 		<th>Type</th>
 		<th>Address</th>
 		<th>Date Sold</th>
-		<th>Days on Market</th>
+		<th>Size</th>
 		<th>Sold Price</th>
 		<th>List Price</th>
 		<th>% of list</th>

@@ -15,7 +15,7 @@ function initialize() {
 function codeAddress() {
   var address = document.getElementById("address").value;
   console.log(address)
-  address = address + "Ontario, Canada"
+  address = address + "Toronto, Ontario, Canada"
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       $("#latitude").val(results[0].geometry.location.k);
@@ -25,19 +25,13 @@ function codeAddress() {
       // map.setCenter(results[0].geometry.location);
       // var marker = new google.maps.Marker({
       //     map: map,
-      //     position: results[0].geometry.location
+      //     position: results[ 0].geometry.location
       // });
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
   });
 }
-
-$("#address").keyup(function (e) {
-    if (e.keyCode == 13) {
-        codeAddress();
-    }
-});
 
 // function localFilter(distance) {
 //   $('#yelp_results .yelp-row .yelp-row-dist').each(function(){
