@@ -59,7 +59,7 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
-        $("#searchResults").tablesorter();
+        $("#searchResults").tablesorter({sortList: [2,1]});
         initialize(); 
     } 
 ); 

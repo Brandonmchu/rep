@@ -1,3 +1,4 @@
-console.log("its working");
 $("#searchResults tbody").html("<%= j render 'sale', sales_near_by: @sales_near_by %>");
 $("#searchResults").trigger("update");
+var sorting = [[2,1]]
+$("#searchResults").trigger("sorton",[sorting]);
