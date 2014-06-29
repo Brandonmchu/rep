@@ -33,6 +33,12 @@ function codeAddress() {
   });
 }
 
+$("#address").keyup(function (e) {
+    if (e.keyCode == 13) {
+        codeAddress();
+    }
+});
+
 // function localFilter(distance) {
 //   $('#yelp_results .yelp-row .yelp-row-dist').each(function(){
 //     if (distance*1000 < $(this).text()){

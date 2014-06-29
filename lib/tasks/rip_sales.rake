@@ -7,11 +7,11 @@ require './lib/tasks/non_house_parser'
 require './lib/tasks/sale_parser'
 
 	# connect to Gmail
-	gmail = Gmail.connect("rep.pricelist@gmail.com", "Pricesforall")
+	gmail = Gmail.connect(ENV['GMAIL_EMAIL'], ENV['GMAIL_PASSWORD'])
 	# get body of email from gmail
 	# add :unread to emails(...) to get only the unread one
 	urls = []
-	mail = gmail.inbox.emails(:from => "sold.watch@gmail.com", :subject => "Toronto Real Estate Sold")
+	mail = gmail.inbox.emails(:from => ENV['SOURCE_EMAIL'], :subject => ENV['SOURCE_SUBJECT'])
 	note = mail.last.body
 
 	# log out of gmail
