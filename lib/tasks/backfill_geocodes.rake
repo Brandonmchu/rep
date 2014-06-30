@@ -24,6 +24,7 @@ non_houses.each do |non_house|
 	else
 		coords = non_house.geocode
 		sleep(1)
+		puts "currently working on #{non_house.id}"
 		non_house.update!(latitude: coords[0], longitude: coords[1])
 		non_house.sales.each do |sale|
 			sale.update!(latitude: non_house.latitude, longitude: non_house.longitude)
