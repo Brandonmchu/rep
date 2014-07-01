@@ -12,6 +12,7 @@ gem "geocoder"
 
 gem 'jquery-rails'
 gem 'jquery-tablesorter'
+gem 'bootstrap-slider-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

@@ -1,17 +1,31 @@
-<h1 class="text-center">Toronto House Price Search</h1>
+<h1 class="hero text-center">Toronto House Price Search</h1>
 <p class="text-center lead">Find information on recent house & condo sales in the GTA</p>
 
-
+	
 	<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: true do %>
-			<div class="search-block">
-			<%= text_field_tag :address, "", class: 'form-control search-field', :placeholder => "Enter your Address" %>
-	    <%= hidden_field_tag :latitude, 43.6405081  %>
-	    <%= hidden_field_tag :longitude, -79.38070490000001  %>
-			<%= submit_tag "Find Sales Near Me", onclick:"codeAddress()",class: "btn btn-success btn-inline search-button" %>
+		<div class="row search-row">
+			<div class="col-md-8 search-block">
+				<%= text_field_tag :address, "", class: 'form-control search-field', :placeholder => "Enter your Address" %>
+			    <%= hidden_field_tag :latitude %>
+			    <%= hidden_field_tag :longitude %>
+			    <%= hidden_field_tag :proximity, 1000 %>
+			    <div class="proximity-slider">
+				    <input id="distance-slider" type="text" data-slider-min="0" data-slider-max="5000" data-slider-step="100" data-slider-value="1000"/&t
+		    		<span id="ex6CurrentSliderValLabel"> Find Sales Within: <span id="max-value">1000</span>m</span>
+	    		</div>
+			</div>
+			<div class="col-md-4">
 
 	<% end %>
-		</div>
+				<input type="button", id="submit-button" value="Find Sales Near Me" onclick="codeAddress()", class="btn btn-success btn-inline search-button center-block">
+			</div>
+		</div>		
+<!-- 		<div class="row" id="search-button-row">
+			<div class="col-md-12">
 
+			</div>
+		</div> -->
+	
 
 <table id="searchResults" class="table table-striped tablesorter">
 	<thead>

@@ -33,6 +33,9 @@ function codeAddress() {
   });
 }
 
+
+
+
 // function localFilter(distance) {
 //   $('#yelp_results .yelp-row .yelp-row-dist').each(function(){
 //     if (distance*1000 < $(this).text()){
@@ -47,11 +50,6 @@ function codeAddress() {
 
 // $( document ).ready(function() {
   
-//   $("#distance_slider").slider();
-//   $("#distance_slider").on('slide', function(slideEvt) {
-//     $("#ex6SliderVal").text(slideEvt.value);
-//     localFilter(slideEvt.value);
-//   });
 
 //   $("#yelp_results").tablesorter();
 // });
@@ -59,7 +57,19 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
-        $("#searchResults").tablesorter({sortList: [2,1]});
-        initialize(); 
+      $("#distance-slider").slider();
+      $("#distance-slider").on('slide', function(slideEvt) {
+        $("#max-value").text(slideEvt.value);
+        $("#proximity").val(slideEvt.value)
+      });
+
+      $("#searchResults").tablesorter({sortList: [2,1]});
+      initialize(); 
+
+      $('#address').keypress(function (e) {
+        if (e.which == 13) {
+          codeAddress();
+        } 
+      });
     } 
 ); 
