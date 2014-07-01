@@ -1,7 +1,10 @@
 <h1 class="hero text-center">Toronto House Price Search</h1>
 <p class="text-center lead">Find information on recent house & condo sales in the GTA</p>
 
-	
+	<div class="row">
+		<div class="col-md-12"></div>
+		<div id="map-canvas"></div>
+	</div>
 	<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: true do %>
 		<div class="row search-row">
 			<div class="col-md-8 search-block">

@@ -1,32 +1,60 @@
 var geocoder;
 var map;
+var markers = [];
+
 function initialize() {
   geocoder = new google.maps.Geocoder();
-  // var lat = document.getElementById("init_lat").value;
-  // var lng = document.getElementById("init_lng").value;
-  // var latlng = new google.maps.LatLng(lat,lng);
-  // var mapOptions = {
-  //   zoom: 12,
-  //   center: latlng
-  // }
-  // map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  var lat = 43.6452904;
+  var lng = -79.3806998;
+  var latlng = new google.maps.LatLng(lat,lng);
+  var mapOptions = {
+    zoom: 14,
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+}
+
+// Sets the map on all markers in the array.
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setAllMap(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setAllMap(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
 }
 
 function codeAddress() {
+  deleteMarkers();
   var address = document.getElementById("address").value;
   console.log(address)
   address = address + "Toronto, Ontario, Canada"
+
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       $("#latitude").val(results[0].geometry.location.k);
       $("#longitude").val(results[0].geometry.location.A);
-      // $("#last_address").val(address)
       $("#search-form").submit();
-      // map.setCenter(results[0].geometry.location);
-      // var marker = new google.maps.Marker({
-      //     map: map,
-      //     position: results[ 0].geometry.location
-      // });
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[ 0].geometry.location,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+      });
+      markers.push(marker);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
