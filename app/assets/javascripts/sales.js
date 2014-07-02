@@ -45,8 +45,8 @@ function codeAddress() {
 
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      $("#latitude").val(results[0].geometry.location.k);
-      $("#longitude").val(results[0].geometry.location.A);
+      $("#latitude").val(results[0].geometry.location.lat());
+      $("#longitude").val(results[0].geometry.location.lng());
       $("#search-form").submit();
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
