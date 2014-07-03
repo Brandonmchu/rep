@@ -7,6 +7,7 @@ gem 'dotenv-rails', :groups => [:development, :test]
 gem 'rails', '4.1.1'
 # Use sqlite3 as the database for Active Record
 # Use SCSS for stylesheets
+
 gem 'sass-rails', '~> 4.0.3'
 gem "geocoder"
 
