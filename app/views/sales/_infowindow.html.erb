@@ -1,0 +1,18 @@
+<h3><%= number_to_currency(sale.sold_price, precision: 0) %></h3>
+<h5 class="info-window-sub"><%= number_to_currency(sale.list_price, precision: 0) %> (<%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f - 1)*100, precision: 2) %>)</h5>
+<% if sale.house_id == 0 %>
+	<!-- NonHouse -->
+	<% non_house = sale.non_house %>
+	<%= non_house.address %>
+	<ul>
+		<li><%= non_house.sqft_range_first %> - <%= non_house.sqft_range_second %> sq. feet</li>
+		<li>Bedrooms: <%= non_house.bedrooms %> + <%= non_house.dens %></li>
+		<li>Washrooms: <%= non_house.washrooms %></li>
+	</ul>
+
+<% else %>
+	<!-- House -->
+	<% house = sale.house %>
+	Rooms: <%= house.rooms %> + <%= house.plus_rooms %>
+<% end %>
+

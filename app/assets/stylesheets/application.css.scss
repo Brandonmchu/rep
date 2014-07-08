@@ -18,3 +18,27 @@
  *= require bootstrap-slider
  */
  
+ input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.container-fluid{
+
+}
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.row-no-margin {
+  [class*="col-"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}

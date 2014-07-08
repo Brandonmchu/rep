@@ -99,5 +99,9 @@ $(document).ready(function()
           codeAddress();
         } 
       });
+
+      var text_input = $('.search-field');
+      text_input.focus ();
+      text_input.select ();
     } 
 ); 

@@ -7,7 +7,7 @@ $("#searchResults").trigger("sorton",[sorting]);
 <% @sales_near_by.each_with_index do |sale, index| %>
 
 	var infowindow<%= index %> = new google.maps.InfoWindow({
-		content: "<%= sale.sold_price %>"
+		content: "<%= j render 'infowindow', sale: sale %>"
 	});
 
 	var newmarker<%= index %> = new google.maps.Marker({
@@ -15,8 +15,11 @@ $("#searchResults").trigger("sorton",[sorting]);
 		map: map
 	});
 	markers.push(newmarker<%= index %>);
-	google.maps.event.addListener(newmarker<%= index %>, 'click', function() {
+	google.maps.event.addListener(newmarker<%= index %>, 'mouseover', function() {
 		infowindow<%= index %>.open(map,newmarker<%= index %>);
+	});
+	google.maps.event.addListener(newmarker<%= index %>, 'mouseout', function() {
+		infowindow<%= index %>.close(map,newmarker<%= index %>);
 	});
 <% end %>
 
