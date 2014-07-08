@@ -27,5 +27,6 @@
 		<td><%= number_to_currency(sale.sold_price, precision: 0) %></td>
 		<td><%= number_to_currency(sale.list_price, precision: 0) %></td>
 		<td><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f)*100, precision: 2) %></td>
+		<td><%= number_with_precision(sale.distance_from_current_location, precision: 0, delimiter: ',') %> </td>
 	</tr>
 <% end %>
