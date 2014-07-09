@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'aws-sdk'
 gem 'pg'
 gem 'whenever'
 gem 'dotenv-rails', :groups => [:development, :test]
