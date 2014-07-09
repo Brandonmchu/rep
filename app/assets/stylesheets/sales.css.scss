@@ -1,6 +1,7 @@
-$topper-color: red;
+$topper-color: rgb(0, 65, 182);
 $topper-height: 3px;
 $nav-height: (50+$topper-height);
+$font: 'Open Sans', sans-serif; 
 
 html, body, {
  height: 100%;
@@ -11,7 +12,7 @@ html, body, {
 }
 
 .navbar{	
-	background-color:rgba(255,255,255,1);
+	background-color:rgba(0,0,0,1);
 	border-width: 0;
 	margin-bottom: 0;
 	height: $nav-height;
@@ -25,16 +26,22 @@ html, body, {
 		
 		padding: 10px 0 10px 0;
 		height: 100%;
+		font-family: $font;
+
+		input{
+			background-color:rgba(0,0,0,1);
+			color:white;
+		}
 
 		::-webkit-input-placeholder {
-			color: #DDDDDD;
+			color: #555555;
 		}
 
 		.search-field{
 			border: none;
 			line-height: 30px;
 			font-size: 20px;
-			font-family: 'Open Sans', sans-serif; 
+
 		}
 		.search-button{
 		}
@@ -46,25 +53,75 @@ html, body, {
 			}
 		}
 
+		.filters-group{
+
+			.dropdown{
+				float:right;
+
+				.dropdown-inner{
+					padding: 20px;
+				}
+
+				.dropdown-menu{
+					background-color:black;
+					color:white;
+					border-radius: 0px;
+				}
+
+			}
+
+			ul > li {
+				list-style-type: none;
+			}
+
+			.fa{
+				margin-right:20px;
+				color:white;
+			}
+
+		}
+
+		.proximity-slider{
+
+				min-width: 250px;
+				font-size: 20px;
+
+				.slider-horizontal{
+					width:100% !important;
+				}
+
+				.slider-handle{
+					background-image: none;
+					background-color: #94EECD;
+					opacity: 1;
+				}
+
+				.slider-track{
+					height:5px;
+
+				}
+					
+		}
+
 	}
 
 
 }
 
 .sub-nav-content{
-	margin-top: $nav-height;
+	padding-top: $nav-height;
 }
 
 
 #map-canvas{
 	width:100%;
-	padding-left: 15px !important; 
+	padding-left: 15px !important;
+	overflow: none; 
 }
 
 .info-window-sub{
 	color: #CCCCCC;
 	font-size: 15px;
-	width: 500px;
 }
 
 

@@ -63,26 +63,6 @@ function codeAddress() {
 
 
 
-
-// function localFilter(distance) {
-//   $('#yelp_results .yelp-row .yelp-row-dist').each(function(){
-//     if (distance*1000 < $(this).text()){
-//       $(this).parent().hide();
-//     }
-//     else {
-//       $(this).parent().show();
-//     }
-//   })
-
-// }
-
-// $( document ).ready(function() {
-  
-
-//   $("#yelp_results").tablesorter();
-// });
-
-
 $(document).ready(function() 
     { 
       $("#distance-slider").slider();
@@ -103,5 +83,11 @@ $(document).ready(function()
       var text_input = $('.search-field');
       text_input.focus ();
       text_input.select ();
+
+      $('.dropdown-menu').click(function(event){
+        event.stopPropagation();
+      });
+
     } 
+
 ); 
