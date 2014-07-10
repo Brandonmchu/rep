@@ -40,8 +40,8 @@ require './lib/tasks/sale_parser'
 			# if an border = 1 then we have a listing
 			if listing.attr("border") == "1"
 
-				address = listing.at_css("tr[1] td[2] tr td").text.strip
-				address_two = listing.at_css("tr[1] td[2] tr[2] td").text.strip
+				address = listing.at_css("tr[1] td[2] tr td").text.gsub(/[[:space:]]*\z/,"")
+				address_two = listing.at_css("tr[1] td[2] tr[2] td").text.gsub(/[[:space:]]*\z/,"")
 
 				#find out if house or non_house and then pass to parsing functions
 				lot = listing.at_css("tr[2] td tr[4] th[1]").text.strip
