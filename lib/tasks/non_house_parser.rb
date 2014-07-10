@@ -83,11 +83,7 @@ def parse_non_house(listing, address, address_two)
 				image_urls = []
 				image_descriptions = []
 		else
-				AWS.config(:access_key_id => ENV['aws_access_key_id'], 
-					:secret_access_key => ENV['aws_secret_access_key']
-				)
-				s3 = AWS::S3.new
-
+				
 				image_urls = all_links_regex.match(images)[0].scan(parsed_links_regex)
 				image_urls.each_index do |i|
 					file = open('http://www.torontomls.net' + image_urls[i]).read

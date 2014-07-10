@@ -29,6 +29,11 @@ require './lib/tasks/sale_parser'
 		urls << url 
 	end
 
+	AWS.config(:access_key_id => ENV['aws_access_key_id'], 
+					:secret_access_key => ENV['aws_secret_access_key']
+				)
+	s3 = AWS::S3.new
+
 	#open each url, identify the details of each listing, parse details and save to db
 	urls.each do |url|
 
