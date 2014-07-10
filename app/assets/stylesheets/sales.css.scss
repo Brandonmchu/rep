@@ -1,10 +1,12 @@
-$topper-color: rgb(0, 65, 182);
+$topper-color: white;
 $topper-height: 3px;
 $nav-height: (50+$topper-height);
-$font: 'Open Sans', sans-serif; 
+$font: 'Open Sans', sans-serif;
+$font-color: black; 
 
 html, body, {
  height: 100%;
+ overflow:   hidden;
 }
 
 .full-height{
@@ -12,7 +14,7 @@ html, body, {
 }
 
 .navbar{	
-	background-color:rgba(0,0,0,1);
+	background-color:$topper-color;
 	border-width: 0;
 	margin-bottom: 0;
 	height: $nav-height;
@@ -29,8 +31,8 @@ html, body, {
 		font-family: $font;
 
 		input{
-			background-color:rgba(0,0,0,1);
-			color:white;
+			background-color:$topper-color;
+			color:$font-color;
 		}
 
 		::-webkit-input-placeholder {
@@ -76,7 +78,7 @@ html, body, {
 
 			.fa{
 				margin-right:20px;
-				color:white;
+				color:$font-color;
 			}
 
 		}

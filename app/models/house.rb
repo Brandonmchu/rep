@@ -6,7 +6,7 @@ class House < ActiveRecord::Base
 	has_many :sales
 
 	geocoded_by :geoaddress
-	after_validation :geocode
+	after_validation :geocode, :if => Proc.new{|house| house.longitude.nil? }
 
 	def geoaddress
   		postal_code_regex = /(.*)[a-zA-Z]\d[a-zA-Z]\d[a-zA-Z]\d|[a-zA-Z]\d[a-zA-Z]\s\d[a-zA-Z]\d/
