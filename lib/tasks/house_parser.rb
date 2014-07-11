@@ -40,9 +40,9 @@ def parse_house(listing, address, address_two,s3)
 					file = open('http://www.torontomls.net' + image_urls[i]).read
 					file_type = /(\.\w*\z)/.match(image_urls[i])[0]
 					file_name = "/" + ('a'..'z').to_a.shuffle[0,8].join
-					obj = s3.buckets[ENV['bucket_name']].objects["house/"+ address + file_name + file_type]
+					obj = s3.buckets[ENV['bucket_name']].objects["house/"+ address.gsub(/[[:space:]]/,"") + file_name + file_type]
 					obj.write(file, :acl => :public_read)
-					image_urls[i] = "https://s3.amazonaws.com/"+ ENV['bucket_name']+ "/house/" + address + file_name + file_type
+					image_urls[i] = "https://s3.amazonaws.com/"+ ENV['bucket_name']+ "/house/" + address.gsub(/[[:space:]]/,"") + file_name + file_type
 				end
 				image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
 		end
