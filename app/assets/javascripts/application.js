@@ -15,4 +15,6 @@
 //= require bootstrap-slider
 //= require jquery-tablesorter
 //= require turbolinks
+//= require moment
+//= require bootstrap-datetimepicker
 //= require_tree .

@@ -16,9 +16,10 @@
  *= require_self
  *= require jquery-tablesorter/theme.bootstrap_2
  *= require bootstrap-slider
+ *= require bootstrap-datetimepicker
  */
  
- input:focus,
+input:focus,
 select:focus,
 textarea:focus,
 button:focus {

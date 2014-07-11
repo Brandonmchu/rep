@@ -67,7 +67,7 @@ $(document).ready(function()
     { 
       $("#distance-slider").slider();
       $("#distance-slider").on('slide', function(slideEvt) {
-        $("#max-value").text(slideEvt.value);
+        $(".max-value").text(slideEvt.value);
         $("#proximity").val(slideEvt.value)
       });
 
@@ -86,6 +86,21 @@ $(document).ready(function()
 
       $('.dropdown-menu').click(function(event){
         event.stopPropagation();
+      });
+
+      $('#datetimepicker1').datetimepicker();
+      $('#datetimepicker2').datetimepicker();
+      $("#datetimepicker1").on("dp.change",function (e) {
+         $('#datetimepicker2').data("DateTimePicker").setMinDate(e.date);
+         var date = new Date($(this).children("input").val());
+         $(this).children("p").text(date.toDateString());
+         $("#start_date").val(date);
+      });
+      $("#datetimepicker2").on("dp.change",function (e) {
+         $('#datetimepicker1').data("DateTimePicker").setMaxDate(e.date);
+         var date = new Date($(this).children("input").val());  
+         $(this).children("p").text(date.toDateString());
+         $("#end_date").val(date);
       });
 
     } 
