@@ -1,5 +1,5 @@
 
-def parse_house(listing, address, address_two)
+def parse_house(listing, address, address_two,s3)
 
 	@existing_house = House.find_by_address(address)
 
@@ -38,9 +38,11 @@ def parse_house(listing, address, address_two)
 				image_urls.each_index do |i|
 
 					file = open('http://www.torontomls.net' + image_urls[i]).read
-					obj = s3.buckets[ENV['bucket_name']].objects[image_urls[i]]
+					file_type = /(\.\w*\z)/.match(image_urls[i])[0]
+					file_name = "/" + ('a'..'z').to_a.shuffle[0,8].join
+					obj = s3.buckets[ENV['bucket_name']].objects["house/"+ address + file_name + file_type]
 					obj.write(file, :acl => :public_read)
-					image_urls[i] = "https://s3.amazonaws.com/"+ ENV['bucket_name']+image_urls[i]
+					image_urls[i] = "https://s3.amazonaws.com/"+ ENV['bucket_name']+ "/house/" + address + file_name + file_type
 				end
 				image_descriptions = image_descriptions_regex.match(images)[0].scan(parsed_descriptions_regex)
 		end
