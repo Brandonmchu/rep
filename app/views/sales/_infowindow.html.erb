@@ -8,11 +8,14 @@
 		<li><%= non_house.sqft_range_first %> - <%= non_house.sqft_range_second %> sq. feet</li>
 		<li>Bedrooms: <%= non_house.bedrooms %> + <%= non_house.dens %></li>
 		<li>Washrooms: <%= non_house.washrooms %></li>
+		<li>Date_sold: <%= non_house.sales.last.sold_date %></li>
+
 	</ul>
 
 <% else %>
 	<!-- House -->
 	<% house = sale.house %>
 	Rooms: <%= house.rooms %> + <%= house.plus_rooms %>
+	Date_sold: <%= house.sales.last.sold_date %>
 <% end %>
 
