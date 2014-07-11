@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get 'non_houses/show'
   get 'houses/show'
-  get 'sales/json' => 'sales#proximity_json'
   root 'sales#index'
   # namespace :api, path: '/', constraints: {subdomain: 'api'} do
     resources :sales

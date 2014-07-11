@@ -29,6 +29,11 @@ require './lib/tasks/sale_parser'
 		urls << url 
 	end
 
+	AWS.config(:access_key_id => ENV['aws_access_key_id'], 
+					:secret_access_key => ENV['aws_secret_access_key']
+				)
+	s3 = AWS::S3.new
+
 	#open each url, identify the details of each listing, parse details and save to db
 	urls.each do |url|
 
@@ -40,15 +45,15 @@ require './lib/tasks/sale_parser'
 			# if an border = 1 then we have a listing
 			if listing.attr("border") == "1"
 
-				address = listing.at_css("tr[1] td[2] tr td").text.strip
-				address_two = listing.at_css("tr[1] td[2] tr[2] td").text.strip
+				address = listing.at_css("tr[1] td[2] tr td").text.gsub(/[[:space:]]*\z/,"")
+				address_two = listing.at_css("tr[1] td[2] tr[2] td").text.gsub(/[[:space:]]*\z/,"")
 
 				#find out if house or non_house and then pass to parsing functions
 				lot = listing.at_css("tr[2] td tr[4] th[1]").text.strip
 				if lot == "Lot:"
-					parse_house(listing, address, address_two)
+					parse_house(listing, address, address_two,s3)
 				else
-					parse_non_house(listing, address, address_two)
+					parse_non_house(listing, address, address_two,s3)
 				end
 
 			end
