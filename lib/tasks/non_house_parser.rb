@@ -38,8 +38,10 @@ def parse_non_house(listing, address, address_two,s3)
 			sqft_range_first = apx_sqft[0].to_i
 			sqft_range_second = apx_sqft[1].to_i
 		elsif apx_sqft != ""
-			sqft_range_first = apx_sqft.match(/(\d+)/)[0].to_i
-			sqft_range_second = apx_sqft.match(/(\d+)/)[0].to_i
+			unless apx_sqft.match(/(\d+)/).nil?
+				sqft_range_first = apx_sqft.match(/(\d+)/)[0].to_i
+				sqft_range_second = apx_sqft.match(/(\d+)/)[0].to_i
+			end
 		end
 		
 		# parse exterior
