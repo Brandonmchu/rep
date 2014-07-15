@@ -1,74 +1,125 @@
 $topper-color: white;
 $topper-height: 3px;
-$nav-height: (50+$topper-height);
 $font: 'Open Sans', sans-serif;
-$font-color: black; 
+$font-color: black;
+$full-width:100%;
+$nav-width: $full-width - 60;
 
-html, body, {
- height: 100%;
- overflow:   hidden;
-}
-
-.full-height{
-	height:100%;
-}
-
-.navbar{	
+#topper{
+	height:$topper-height;
 	background-color:$topper-color;
-	border-width: 0;
-	margin-bottom: 0;
-	height: $nav-height;
+}
 
-	#topper{
-		height:$topper-height;
-		background-color:$topper-color;
+.search-block{
+position: fixed;
+z-index: 1000;
+margin-left: 5%; 
+margin-right: 5%;
+width:90%;
+font-family: $font;
+
+	.search-bar-inner{
+		width: 50%;
+		float:left;
+
+
+		.filter-spacer-middle{
+			width:6.666%;
+		}
+
+		.calendar-filter:hover{
+				background-color: rgba(22,89,190,1);
+			}
+
+		.calendar-filter{
+			text-align: center;
+			background-color: rgba(22,89,190,0.5);
+			border-radius: 4px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+
+			
+
+			span, i {
+				color: $topper-color;
+			}
+
+
+			.calendar-label{
+				font-size: 16px;
+			}
+
+			.filter-date{
+				font-size: 16px;
+			}
+
+		}
 	}
 
-	.searchbar-inner{
-		
-		padding: 10px 0 10px 0;
-		height: 100%;
-		font-family: $font;
-
 		input{
-			background-color:$topper-color;
+			background-color: rgba(255,255,255,0.8);
 			color:$font-color;
+			margin-top: 20px;
+			border-radius: 4px;
+			width:100%%;
+			margin-bottom: 15px;
+			padding: 5px 10% 5px 10%;
+			/*text-align: center;*/
+
 		}
 
 		::-webkit-input-placeholder {
-			color: #555555;
+			color: #888888;
+			text-align: center;
+			font-size: 20px;
 		}
+
 
 		.search-field{
 			border: none;
-			line-height: 30px;
-			font-size: 20px;
+			line-height: 32px;
+			font-size: 25px;
 
 		}
 		.search-button{
 		}
 
-		.proximity-slider{
-			float:left;
-			#distance-slider {
-				width:50%;
+		#map-drop-dropdown{
+			height: 100%;
+
+			a{
+				float:left;
 			}
 		}
 
 		.filters-group{
 
-			.dropdown{
-				float:right;
+			ul{
+				height: 100%;
+				width: 100%;
+			}
 
-				.dropdown-inner{
-					padding: 20px;
+			li {
+				float:right;
+			}
+			ul > li {
+				list-style-type: none;
+				margin-left: 15px;
+				width:20%;
+
+			}
+
+				a:hover{
+					text-decoration: none;
 				}
 
 				.dropdown-menu{
-					background-color:black;
-					color:white;
-					border-radius: 0px;
+					background-color:$topper-color;
+					color:$font-color;
+					border-radius: 4px;
+					min-width: 0px;
 				}
+
 
 				p {
 					float:right;
@@ -77,65 +128,67 @@ html, body, {
 
 
 				}
-
-			}
-
-			ul > li {
-				list-style-type: none;
-			}
-
 			.fa{
-				margin-left:20px;
 				color:$font-color;
 			}
 
+
+			#proximity-slider-drop{
+				li {
+					margin-left: 0;
+				}
+
+				.proximity-slider{
+
+					padding: 0 8px 0 5px;
+
+					.slider-vertical{
+						margin: 5px 0 15px 0;
+
+						
+					}
+
+					.slider-handle{
+						background-image: none;
+						background-color: #428bca;
+						opacity: 1;
+						margin-left: -8px;
+					}
+
+					.slider-track{
+						background-color: $font-color;
+						background-image: none;
+						border: none;
+						width:2px;
+						margin: 0;
+
+						.slider-selection{
+							background-image: none;
+						}
+				}				
+
+			}
+
+
 		}
 
-		.proximity-slider{
 
-				min-width: 250px;
-				font-size: 20px;
-
-				.slider-horizontal{
-					width:100% !important;
-				}
-
-				.slider-handle{
-					background-image: none;
-					background-color: #94EECD;
-					opacity: 1;
-				}
-
-				.slider-track{
-					height:5px;
-
-				}
-					
-		}
 
 	}
-
 
 }
 
 .sub-nav-content{
-	padding-top: $nav-height;
+
 }
 
 
 #map-canvas{
-	width:100%;
-	padding-left: 15px !important;
-	overflow: none; 
+width:100%;
+overflow: none; 
 }
 
 .info-window-sub{
-	color: #CCCCCC;
-	font-size: 15px;
-}
-
-
-
-#address{
-	width: 100%;
+color: #CCCCCC;
+font-size: 15px;
 }

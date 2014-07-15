@@ -1,75 +1,74 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="row" id="topper">
+<!-- <nav class="navbar navbar-default navbar-fixed-top" role="navigation"> -->
+<!-- <div class="row" id="topper">
 	<div class="col-md-12"></div>
-</div>
-  <div class="container-fluid">
+</div> -->
 	<div class="search-block">
 		<%= form_tag root_path, method: :get, id:"search-form", class: 'form-inline', remote: true do %>
-			<div class="row searchbar-inner">
-				<div class="col-md-6 search-block">
-					<%= text_field_tag :address, "", class: 'search-field', :placeholder => "Enter an Address (123 Fake st., Toronto)" %>
+			<div class="row">
+				<div class="search-bar-inner">
+					<%= text_field_tag :address, "", class: 'search-field', :placeholder => " Enter an Address (123 Fake st., Toronto)" %>
 				    <%= hidden_field_tag :latitude %>
 				    <%= hidden_field_tag :longitude %>
 				    <%= hidden_field_tag :proximity, 1000 %>
 				    <%= hidden_field_tag :start_date, Time.now - 14.days %>
 				    <%= hidden_field_tag :end_date, Time.now %>
+				    <div class='col-md-5 no-padding'>
+				    	<div class="calendar-filter">
+							<div id='datetimepicker1'>
+								<span class="calendar-label">From:&nbsp;&nbsp;</span>
+			        			<input type='text' class="form-control" style="display:none;" />
+			        			&nbsp;<i class="fa fa-calendar fa-1x"></i>&nbsp;
+			        			<span class="filter-date"><%= @start_date.strftime('%a %b %d %Y') %></span>
+							</div>
+						</div>
+					</div>
+					<div class='col-md-1'></div>
+					<div class='col-md-5 no-padding'>
+						<div class="calendar-filter">
+							<div id='datetimepicker2'>
+			    				<span class="calendar-label">To:&nbsp;&nbsp;</span>
+			        			<input type='text' class="form-control" style="display:none;" />
+			        			&nbsp;<i class="fa fa-calendar fa-1x"></i>&nbsp;
+			        			<span class="filter-date"><%= @end_date.strftime('%a %b %d %Y') %></span>
+							</div>
+						</div>				    
+					</div>
 				</div>
-				<div class="col-md-6">
+			</div>
 		<% end %>
+
+	                			
+	</div>
+
+<!-- 	<div>
+				<div class="col-md-7">
+		
 				<div class="filters-group">
 					<ul class="pull-right">
-						<li class="dropdown">
-							<a id="cog-drop" data-toggle="dropdown"><i class="fa fa-cog fa-2x"></i></a>
-								<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="cog-drop">
-			    					<div class="dropdown-inner">
-			    						<li><i class="fa fa-home fa-2x"></i><i class="fa fa-building fa-2x"></i></li>
-			  						</div>
-			  					</ul>
-		  				</li>
-		  				<li class="dropdown">
-		  					<p><span class="max-value">1000</span>m</p>
-		  					<a id="map-drop" data-toggle="dropdown"><i class="fa fa-map-marker fa-2x"></i></a>
-
-							<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="map-drop">
-		    					<div class="dropdown-inner">	
+		  				<li class="dropdown" id="map-drop-dropdown">
+		  					
+		  					<a id="map-drop" data-toggle="dropdown"><i class="fa fa-map-marker fa-2x"></i><span class="max-value"> 1000</span>m</a>
+		  					<span class="calendar-label">Within: </span>
+							<ul class="dropdown-menu" id="proximity-slider-drop" role="menu" aria-labelledby="map-drop">	
 			    					<li>					
 			    						<div class="proximity-slider">
-			    							<span id="ex6CurrentSliderValLabel"> Find Sales Within: <span class="max-value">1000</span>m</span>
-							    			<input id="distance-slider" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="100" data-slider-value="300">
+							    			<input id="distance-slider" type="text" data-slider-min="0" data-slider-max="1000" data-slider-step="100" data-slider-value="1000">
 				    					</div>				
 			    					</li>
-		    					</div>
 		  					</ul>
 		  				</li>
-                		<li class="dropdown">
-                			<div id='datetimepicker2'>
-                    			<input type='text' class="form-control" style="display:none;" />
-                    			<p><%= @end_date.strftime('%a %b %d %Y') %></p>
-                    			<i class="fa fa-calendar fa-2x"></i>
-                			</div>
-		  				</li>		  				
-		  				<li class="dropdown">
-		  					<div id='datetimepicker1'>
-                    			<input type='text' class="form-control" style="display:none;" />
-                    			<p><%= @start_date.strftime('%a %b %d %Y') %></p>
-                    			<i class="fa fa-calendar fa-2x"></i>
-                			</div>
+		  				<li><p>Sales Between:</p></li>
+                		<li>
+                			
+
+		  				</li>
+		  				<li>
+
                 		</li>
-
-<!-- 		  				<li class="dropdown">
-
-		  					<a id="calendar-drop" data-toggle="dropdown"><i class="fa fa-calendar fa-2x"></i></a>
-							<ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="calendar-drop">
-		    					<li>JOHNNY</li>
-		  					</ul>
-		  				</li>	 -->
-<!-- 						<li class="dropdown"><i class="fa fa-globe fa-2x"></i></li>
-						<li class="dropdown"><i class="fa fa-list fa-2x"></i></li> -->
 					</ul>
 				</div>
-<!-- 					<input type="button", id="submit-button" value="Find Sales Near Me" onclick="codeAddress()", class="btn btn-success btn-inline search-button center-block"> -->
 				</div>
 			</div>			
 	</div>
-  </div>
-</nav>
+ -->
+<!-- </nav> -->
