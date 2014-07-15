@@ -76,11 +76,18 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
-      // $("#distance-slider").slider({tooltip:'hide',orientation:'vertical'});
-      // $("#distance-slider").on('slide', function(slideEvt) {
-      //   $(".max-value").text(slideEvt.value);
-      //   $("#proximity").val(slideEvt.value)
-      // });
+      $("#distance-slider").slider({tooltip:'hide',orientation:'vertical'});
+      $(".proximity-filter-inner").click(function(){
+        if ($(".slider").css('display') == 'block'){
+          $(".slider").css("display","none")
+        } else{
+          $(".slider").css("display","block")
+        }
+      })
+      $("#distance-slider").on('slide', function(slideEvt) {
+        $(".max-value").text(slideEvt.value);
+        $("#proximity").val(slideEvt.value)
+      });
 
       // $("#searchResults").tablesorter({sortList: [2,1]});
       initialize(); 
@@ -107,12 +114,14 @@ $(document).ready(function()
          var date = new Date($(this).children("input").val());
          $(this).children(".filter-date").text(date.toDateString());
          $("#start_date").val(date);
+         $("#search-form").submit();
       });
       $("#datetimepicker2").on("dp.change",function (e) {
          $('#datetimepicker1').data("DateTimePicker").setMaxDate(e.date);
          var date = new Date($(this).children("input").val());  
          $(this).children(".filter-date").text(date.toDateString());
          $("#end_date").val(date);
+         $("#search-form").submit();
       });
 
       adjustSearchPostiion = function (){
@@ -130,8 +139,14 @@ $(document).ready(function()
         $('#datetimepicker2').parent().parent().css('margin-right',adjustment+'px');
       }
 
+      // adjustProximityHeight = function (){
+      //   var searchHeight = $('#address').height();
+      //   $('.proximity-filter i').css('height',searchHeight+'px');
+      // }
+
       adjustSearchPostiion();
       adjustFilterPostiion();
+      // adjustProximityHeight();
 
       $(window).resize(function(){
         if ($(window).width() < 1000){
@@ -142,6 +157,7 @@ $(document).ready(function()
         else {
         adjustSearchPostiion();
         adjustFilterPostiion();
+        // adjustProximityHeight();
         }
       })
 
