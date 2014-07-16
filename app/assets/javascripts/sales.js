@@ -76,12 +76,12 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
-      $("#distance-slider").slider({tooltip:'hide',orientation:'vertical'});
-      $(".proximity-filter-inner").click(function(){
-        if ($(".slider").css('display') == 'block'){
-          $(".slider").css("display","none")
+      $("#distance-slider").slider({tooltip:'hide'});
+      $(".proximity-filter").click(function(){
+        if ($("#slider-dropdown").css('display') == 'block'){
+          $("#slider-dropdown").css("display","none")
         } else{
-          $(".slider").css("display","block")
+          $("#slider-dropdown").css("display","block")
         }
       })
       $("#distance-slider").on('slide', function(slideEvt) {
@@ -114,14 +114,14 @@ $(document).ready(function()
          var date = new Date($(this).children("input").val());
          $(this).children(".filter-date").text(date.toDateString());
          $("#start_date").val(date);
-         $("#search-form").submit();
+         codeAddress();
       });
       $("#datetimepicker2").on("dp.change",function (e) {
          $('#datetimepicker1').data("DateTimePicker").setMaxDate(e.date);
          var date = new Date($(this).children("input").val());  
          $(this).children(".filter-date").text(date.toDateString());
          $("#end_date").val(date);
-         $("#search-form").submit();
+         codeAddress();
       });
 
       adjustSearchPostiion = function (){
@@ -139,25 +139,34 @@ $(document).ready(function()
         $('#datetimepicker2').parent().parent().css('margin-right',adjustment+'px');
       }
 
-      // adjustProximityHeight = function (){
-      //   var searchHeight = $('#address').height();
-      //   $('.proximity-filter i').css('height',searchHeight+'px');
-      // }
+      adjustProximityFilter = function (){
+        var proximityWidth = $('.proximity-filter').outerWidth();
+        var proximityHeight = $('.proximity-filter').outerHeight();
+        var proximityPositionLeft = $('.proximity-filter').offset().left;
+        var proximityPositionTop = $('.proximity-filter').offset().top;
+        var topAdjustment = proximityPositionTop + proximityHeight
+        $('#slider-dropdown').css('width',proximityWidth+'px');
+        $('#slider-dropdown').css('left',proximityPositionLeft+'px');
+        $('#slider-dropdown').css('top',topAdjustment+'px');
+      }
+
 
       adjustSearchPostiion();
       adjustFilterPostiion();
-      // adjustProximityHeight();
+      adjustProximityFilter();
 
       $(window).resize(function(){
         if ($(window).width() < 1000){
           adjustSearchPostiion();
+          adjustProximityFilter();
+          //special case for datetime responsive
           $('#datetimepicker1').parent().parent().css('margin-left','0px');
           $('#datetimepicker2').parent().parent().css('margin-right','0px');
         }
         else {
         adjustSearchPostiion();
         adjustFilterPostiion();
-        // adjustProximityHeight();
+        adjustProximityFilter();
         }
       })
 
