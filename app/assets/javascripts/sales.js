@@ -76,21 +76,27 @@ function codeAddress() {
 
 $(document).ready(function() 
     { 
+      initialize();
+      codeAddress();
+
       $("#distance-slider").slider({tooltip:'hide'});
       $(".proximity-filter").click(function(){
         if ($("#slider-dropdown").css('display') == 'block'){
           $("#slider-dropdown").css("display","none")
+          $(".proximity-filter").css("border-bottom-right-radius","$search-border-radius")
         } else{
           $("#slider-dropdown").css("display","block")
+          $(".proximity-filter").css("border-bottom-right-radius","0px")
         }
       })
       $("#distance-slider").on('slide', function(slideEvt) {
         $(".max-value").text(slideEvt.value);
         $("#proximity").val(slideEvt.value)
+        codeAddress();
       });
 
       // $("#searchResults").tablesorter({sortList: [2,1]});
-      initialize(); 
+
 
       $('#address').keypress(function (e) {
         if (e.which == 13) {
