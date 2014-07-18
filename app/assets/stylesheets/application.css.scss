@@ -19,6 +19,8 @@
  *= require bootstrap-datetimepicker
  */
  
+//= depend_on_asset "loading_bar.gif"
+
 input:focus,
 select:focus,
 textarea:focus,
