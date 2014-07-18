@@ -92,7 +92,7 @@ $(document).ready(function()
       $("#distance-slider").on('slide', function(slideEvt) {
         $(".max-value").text(slideEvt.value);
         $("#proximity").val(slideEvt.value)
-          $.doTimeout( 'slide', 750, function(){
+          $.doTimeout( 'slide', 500, function(){
             codeAddress();
           });
           
@@ -179,6 +179,18 @@ $(document).ready(function()
         }
       })
 
+    // hide it first
+    $("#topper").hide();
+
+    // when an ajax request starts, show topper
+    $(document).ajaxStart(function(){
+        $("#topper").show();
+    });
+
+    // when an ajax request complets, hide topper    
+    $(document).ajaxStop(function(){
+        $("#topper").hide();
+    });
     } 
 
 ); 

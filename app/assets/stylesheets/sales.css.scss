@@ -1,9 +1,7 @@
-$topper-color: white;
+$topper-color: red;
 $topper-height: 3px;
 $font: 'Open Sans', sans-serif;
 $font-color: black;
-$full-width:100%;
-$nav-width: $full-width - 60;
 $search-margin-top:20px;
 $search-margin-bottom:15px;
 $search-background-color: rgba(255,255,255,0.8);
@@ -16,8 +14,13 @@ $filter-hover-color:rgba(22,89,190,1);
 $filter-font-color:white;
 
 #topper{
-	height:$topper-height;
-	background-color:$topper-color;
+	height: 3px;
+	background: url(loading_bar.gif) no-repeat center;
+	background-size: 100%;
+	position: fixed;
+	z-index: 3000;
+	width: 100%;
+	border:none;
 }
 
 .search-block{
