@@ -92,7 +92,10 @@ $(document).ready(function()
       $("#distance-slider").on('slide', function(slideEvt) {
         $(".max-value").text(slideEvt.value);
         $("#proximity").val(slideEvt.value)
-        codeAddress();
+          $.doTimeout( 'slide', 750, function(){
+            codeAddress();
+          });
+          
       });
 
       // $("#searchResults").tablesorter({sortList: [2,1]});
