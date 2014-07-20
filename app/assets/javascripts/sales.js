@@ -9,7 +9,18 @@ function initialize() {
   var latlng = new google.maps.LatLng(lat,lng);
   var mapOptions = {
     zoom: 14,
-    center: latlng
+    center: latlng,
+    backgroundColor: "white",
+    disableDefaultUI: true,
+    streetViewControl: true,
+    streetViewControlOptions: {
+      position: google.maps.ControlPosition.TOP_LEFT
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+      style: google.maps.ZoomControlStyle.SMALL,
+      position: google.maps.ControlPosition.TOP_LEFT
+    }
   }
   map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 }
@@ -92,14 +103,30 @@ function subscribe(){
 
 $(document).ready(function() 
     { 
-      $("#distance-slider").slider();
+      initialize();
+      codeAddress();
+
+      $("#distance-slider").slider({tooltip:'hide'});
+      $(".proximity-filter").click(function(){
+        if ($("#slider-dropdown").css('display') == 'block'){
+          $("#slider-dropdown").css("display","none")
+          $(".proximity-filter").css("border-bottom-right-radius","$search-border-radius")
+        } else{
+          $("#slider-dropdown").css("display","block")
+          $(".proximity-filter").css("border-bottom-right-radius","0px")
+        }
+      })
       $("#distance-slider").on('slide', function(slideEvt) {
         $(".max-value").text(slideEvt.value);
         $("#proximity").val(slideEvt.value)
+          $.doTimeout( 'slide', 500, function(){
+            codeAddress();
+          });
+          
       });
 
-      $("#searchResults").tablesorter({sortList: [2,1]});
-      initialize(); 
+      // $("#searchResults").tablesorter({sortList: [2,1]});
+
 
       $('#address').keypress(function (e) {
         if (e.which == 13) {
@@ -110,10 +137,10 @@ $(document).ready(function()
       var text_input = $('.search-field');
       text_input.focus ();
       text_input.select ();
-
-      $('.dropdown-menu').click(function(event){
-        event.stopPropagation();
-      });
+  
+      // $('.dropdown-menu').click(function(event){
+      //   event.stopPropagation();
+      // });
       
       $('.modal_email_subscription').click(function(event){
         event.stopPropagation();
@@ -124,16 +151,76 @@ $(document).ready(function()
       $("#datetimepicker1").on("dp.change",function (e) {
          $('#datetimepicker2').data("DateTimePicker").setMinDate(e.date);
          var date = new Date($(this).children("input").val());
-         $(this).children("p").text(date.toDateString());
+         $(this).children(".filter-date").text(date.toDateString());
          $("#start_date").val(date);
+         codeAddress();
       });
       $("#datetimepicker2").on("dp.change",function (e) {
          $('#datetimepicker1').data("DateTimePicker").setMaxDate(e.date);
          var date = new Date($(this).children("input").val());  
-         $(this).children("p").text(date.toDateString());
+         $(this).children(".filter-date").text(date.toDateString());
          $("#end_date").val(date);
+         codeAddress();
       });
 
+      adjustSearchPostiion = function (){
+        windowWidth = $('.search-block').width();
+        var searchWidth = $('.search-bar-inner').width();
+        var margin = (windowWidth - searchWidth) / 2
+        $('.search-bar-inner').css('margin-left', margin)
+        $('.search-bar-inner').css('margin-right', margin)  
+      }
+
+      adjustFilterPostiion = function (){
+        var searchWidth = $('.search-bar-inner').width();
+        var adjustment = (1/12 * searchWidth / 2)
+        $('#datetimepicker1').parent().parent().css('margin-left',adjustment+'px');
+        $('#datetimepicker2').parent().parent().css('margin-right',adjustment+'px');
+      }
+
+      adjustProximityFilter = function (){
+        var proximityWidth = $('.proximity-filter').outerWidth();
+        var proximityHeight = $('.proximity-filter').outerHeight();
+        var proximityPositionLeft = $('.proximity-filter').offset().left;
+        var proximityPositionTop = $('.proximity-filter').offset().top;
+        var topAdjustment = proximityPositionTop + proximityHeight
+        $('#slider-dropdown').css('width',proximityWidth+'px');
+        $('#slider-dropdown').css('left',proximityPositionLeft+'px');
+        $('#slider-dropdown').css('top',topAdjustment+'px');
+      }
+
+
+      adjustSearchPostiion();
+      adjustFilterPostiion();
+      adjustProximityFilter();
+
+      $(window).resize(function(){
+        if ($(window).width() < 1000){
+          adjustSearchPostiion();
+          adjustProximityFilter();
+          //special case for datetime responsive
+          $('#datetimepicker1').parent().parent().css('margin-left','0px');
+          $('#datetimepicker2').parent().parent().css('margin-right','0px');
+        }
+        else {
+        adjustSearchPostiion();
+        adjustFilterPostiion();
+        adjustProximityFilter();
+        }
+      })
+
+    // hide it first
+    $("#topper").hide();
+
+    // when an ajax request starts, show topper
+    $(document).ajaxStart(function(){
+        $("#topper").show();
+    });
+
+    // when an ajax request complets, hide topper    
+    $(document).ajaxStop(function(){
+        $("#topper").hide();
+    });
     } 
 
 ); 

@@ -19,15 +19,13 @@
  *= require bootstrap-datetimepicker
  */
  
+//= depend_on_asset "loading_bar.gif"
+
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
     outline: none;
-}
-
-.container-fluid{
-
 }
 
 .row-no-padding {
@@ -42,4 +40,36 @@ button:focus {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
+}
+
+html, body, {
+ height: 100%;
+ overflow: hidden;
+}
+
+.full-height{
+	height:100%;
+}
+
+.container-fluid{
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.no-margin {
+   margin: 0 !important;
+}
+
+.no-padding {
+   padding: 0 !important;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }
