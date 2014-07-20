@@ -2,6 +2,7 @@ class SalesController < ApplicationController
 
   def index
     # @sales_near_by = Sale.where('longitude is NOT NULL')
+    
     latitude = params[:latitude] || 43.653226
     longitude = params[:longitude] || -79.38318429999998
     proximity = params[:proximity] || 1000

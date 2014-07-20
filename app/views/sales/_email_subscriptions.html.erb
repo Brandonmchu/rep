@@ -1,0 +1,9 @@
+<div id="modal_overlay", onclick='overlay()'>
+     <div class="modal_email_subscription">
+     	<div class="modal_content">
+          	<%= text_field_tag :email, nil, placeholder: "Email addy" %>
+        	<%= text_field_tag :loi, nil, placeholder: "Location of Interest" %>
+        	<%= button_tag "Get new sales sent to your email daily!", id: "subscribe_button", onclick: 'subscribe()' %>
+        </div>
+    </div>
+</div>
