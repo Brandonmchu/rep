@@ -73,8 +73,10 @@ function codeAddress() {
 }
 
 function overlay() {
-  el = document.getElementById("modal_overlay");
+  var el = document.getElementById("modal_overlay");
   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+  var subscribe = $('.subscribe').get(0);
+  subscribe.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 }
 
 
@@ -96,8 +98,10 @@ function subscribe(){
           $(".modal_email_subscription h4").hide();
           $(".modal_email_subscription h2").html(data)
           el = document.getElementById("modal_overlay");
+          var subscribe = $('.subscribe').get(0);
           setTimeout(function(){
             el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            subscribe.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
           },1000);
         }
     });
