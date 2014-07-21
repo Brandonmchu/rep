@@ -73,9 +73,8 @@ function codeAddress() {
 }
 
 function overlay() {
-  el = document.getElementById("modal_overlay");
-  el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-
+  overlay = document.getElementById("modal_overlay");
+  overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
 }
 
 
@@ -93,9 +92,13 @@ function subscribe(){
       url: '/users',
       data: {'email':email,'locations_of_interest':loi},
       success: function(data,textStatus,jqXHR){
-          alert(data);
-          el = document.getElementById("modal_overlay");
-          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+          $(".modal_content").hide();
+          $(".modal_email_subscription h4").hide();
+          $(".modal_email_subscription h2").html(data)
+          overlay = document.getElementById("modal_overlay");
+          setTimeout(function(){
+            overlay.style.visibility = (overlay.style.visibility == "visible") ? "hidden" : "visible";
+          },1000);
         }
     });
   }
@@ -218,6 +221,8 @@ $(document).ready(function()
         adjustProximityFilter();
         }
       })
+
+
 
     // hide it first
     $("#topper").hide();

@@ -1,8 +1,8 @@
 <div class="property-info-window">
 	<div class="row">
 		<div class="col-md-12 info-headline">
-			<span class="sold-price"><%= number_to_currency(sale.sold_price, precision: 0) %></span>
-				<span class="list-price">(<%= number_to_currency(sale.list_price, precision: 0) %> 
+			<span class="sold-price">Sold For: <%= number_to_currency(sale.sold_price, precision: 0) %></span>
+				<br><span class="list-price">(List Price: <%= number_to_currency(sale.list_price, precision: 0) %> 
 					<% if (sale.sold_price.to_f / sale.list_price.to_f - 1)*100 >= 0 %>
 						<span class="positive"><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f - 1)*100, precision: 2) %></span>
 					<% else %>

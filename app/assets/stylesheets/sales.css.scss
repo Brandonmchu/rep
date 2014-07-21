@@ -10,8 +10,8 @@ $search-padding-top-bottom: 5px;
 $filter-color:rgba(52, 73, 94,1.0);
 $filter-hover-color:rgba(41, 128, 185,1.0);
 $filter-font-color:white;
-$green:#1abc9c;
-$darker-green:#16a085;
+$green:rgba(46, 204, 113,1.0);
+$darker-green:rgba(39, 174, 96,1.0);
 
 #topper{
 	height: 3px;
@@ -284,7 +284,7 @@ overflow: none;
      			border-radius: $search-border-radius;
 				border:none;
 				padding: 10px;
-				background-color: green;
+				background-color: $darker-green;
 				color: white;
 				margin-top: 30px;
 
