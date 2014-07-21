@@ -8,7 +8,7 @@ function initialize() {
   var lng = -79.3806998;
   var latlng = new google.maps.LatLng(lat,lng);
   var mapOptions = {
-    zoom: 14,
+    zoom: 15,
     center: latlng,
     backgroundColor: "white",
     disableDefaultUI: true,
@@ -79,14 +79,16 @@ $(document).ready(function()
       initialize();
       codeAddress();
 
+      var proximityFilter = $(".proximity-filter");
+
       $("#distance-slider").slider({tooltip:'hide'});
-      $(".proximity-filter").click(function(){
+      proximityFilter.click(function(){
         if ($("#slider-dropdown").css('display') == 'block'){
           $("#slider-dropdown").css("display","none")
-          $(".proximity-filter").css("border-bottom-right-radius","$search-border-radius")
+          $(this).css("border-bottom-right-radius","$search-border-radius")
         } else{
           $("#slider-dropdown").css("display","block")
-          $(".proximity-filter").css("border-bottom-right-radius","0px")
+          $(this).css("border-bottom-right-radius","0px")
         }
       })
       $("#distance-slider").on('slide', function(slideEvt) {
@@ -98,8 +100,16 @@ $(document).ready(function()
           
       });
 
-      // $("#searchResults").tablesorter({sortList: [2,1]});
-
+      $(document).click(function(event){
+        var target = $(event.target);
+        if (target.is("span") || target.is(".proximity-filter") || target.is(".proximity-filter-inner") || target.is(".slider div")){
+          console.log("BOOYA");
+        } else{
+          if (proximityFilter.css("display") != "none"){
+            $("#slider-dropdown").css("display","none");
+          }
+        }
+      });
 
       $('#address').keypress(function (e) {
         if (e.which == 13) {
@@ -191,6 +201,8 @@ $(document).ready(function()
     $(document).ajaxStop(function(){
         $("#topper").hide();
     });
-    } 
+  }
+
+
 
 ); 

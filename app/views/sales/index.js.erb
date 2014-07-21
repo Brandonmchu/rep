@@ -1,9 +1,3 @@
-$("#searchResults tbody").html("<%= j render 'sale', sales_near_by: @sales_near_by %>");
-$("#searchResults").trigger("update");
-var sorting = [[2,1]]
-$("#searchResults").trigger("sorton",[sorting]);
-
-
 <% @sales_near_by.each_with_index do |sale, index| %>
 
 	var infowindow<%= index %> = new google.maps.InfoWindow({
@@ -15,11 +9,16 @@ $("#searchResults").trigger("sorton",[sorting]);
 		map: map
 	});
 	markers.push(newmarker<%= index %>);
-	google.maps.event.addListener(newmarker<%= index %>, 'mouseover', function() {
+	google.maps.event.addListener(newmarker<%= index %>, 'click', function() {
 		infowindow<%= index %>.open(map,newmarker<%= index %>);
 	});
-	google.maps.event.addListener(newmarker<%= index %>, 'mouseout', function() {
-		infowindow<%= index %>.close(map,newmarker<%= index %>);
-	});
+	// google.maps.event.addListener(newmarker<%= index %>, 'mouseover', function() {
+	// 	infowindow<%= index %>.open(map,newmarker<%= index %>);
+	// });
+	// google.maps.event.addListener(newmarker<%= index %>, 'mouseout', function() {
+	// 	infowindow<%= index %>.close(map,newmarker<%= index %>);
+	// });
 <% end %>
 
+
+// $(".property-info-window").parent().parent().parent().get(0).css("border-radius","20px") 
