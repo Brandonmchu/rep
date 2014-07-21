@@ -159,8 +159,12 @@ $(document).ready(function()
         event.stopPropagation();
       });
 
-      $('#datetimepicker1').datetimepicker();
-      $('#datetimepicker2').datetimepicker();
+      $('#datetimepicker1').datetimepicker({
+        pickTime: false
+      });
+      $('#datetimepicker2').datetimepicker({
+        pickTime: false
+      });
       $("#datetimepicker1").on("dp.change",function (e) {
          $('#datetimepicker2').data("DateTimePicker").setMinDate(e.date);
          var date = new Date($(this).children("input").val());

@@ -2,13 +2,13 @@
 	<div class="row">
 		<div class="col-md-12 info-headline">
 			<span class="sold-price">Sold For: <%= number_to_currency(sale.sold_price, precision: 0) %></span>
-				<br><span class="list-price">(List Price: <%= number_to_currency(sale.list_price, precision: 0) %> 
+				<br><span class="list-price">List Price: <%= number_to_currency(sale.list_price, precision: 0) %> 
 					<% if (sale.sold_price.to_f / sale.list_price.to_f - 1)*100 >= 0 %>
 						<span class="positive"><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f - 1)*100, precision: 2) %></span>
 					<% else %>
 						<span class="negative"><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f - 1)*100, precision: 2) %></span>
 					<% end %>
-				)</span>
+				</span>
 		</div>
 	</div>
 
@@ -16,13 +16,13 @@
 		<!-- NonHouse -->
 		<% non_house = sale.non_house %>
 		<div class="row">
-			<div class="col-md-12 info-sub-headline"><%= non_house.address %></div>
-		</div>
-		<div class="row">
 			<div class="col-md-5">
 				<div class="picture">
 					<%= image_tag(non_house.image_urls.first) %>
 				</div>
+				<div class="row">
+					<div class="col-md-12 info-sub-headline no-padding"><%= non_house.address %></div>
+				</div>				
 			</div>
 			<div class="col-md-7 no-padding">
 				<div class="info-inner">
@@ -42,12 +42,12 @@
 		<!-- House -->
 		<% house = sale.house %>
 		<div class="row">
-			<div class="col-md-12 info-sub-headline"><%= house.address %></div>
-		</div>
-		<div class="row">
 			<div class="col-md-5">
 				<div class="picture">
 					<%= image_tag(house.image_urls.first) %>
+				</div>
+				<div class="row">
+					<div class="col-md-12 info-sub-headline no-padding"><%= house.address %></div>
 				</div>
 			</div>
 			<div class="col-md-7 no-padding">

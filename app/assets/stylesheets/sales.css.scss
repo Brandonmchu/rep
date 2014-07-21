@@ -12,6 +12,7 @@ $filter-hover-color:rgba(41, 128, 185,1.0);
 $filter-font-color:white;
 $green:rgba(46, 204, 113,1.0);
 $darker-green:rgba(39, 174, 96,1.0);
+$image-width:150px;
 
 #topper{
 	height: 3px;
@@ -178,7 +179,7 @@ font-family: $font;
 	.picture{
 
 		img{
-			width: 150px;
+			width: $image-width;
 			border-radius: 4px;
 			margin-right: 5px;
 		}
@@ -187,11 +188,13 @@ font-family: $font;
 
 	.info-headline{
 		text-align: center;
+		margin-bottom: 10px;
 	}
 
 	.info-sub-headline{
 		text-align: center;	
-		margin-bottom: 10px;
+		font-size: 10px;
+		width: $image-width;
 	}
 
 	font-family:$font;
@@ -212,14 +215,19 @@ font-family: $font;
 
 	.info-label{
 		color: $filter-hover-color;
+		font-size: 15px;
+	}
+
+	li{
+		font-size: 12px;
 	}
 
 	.info-inner{
-		padding: 5px;
+		padding-left: 25px;
+
 	}
 
 	.gapper{
-		min-height: 10px;
 	}
 
 }
