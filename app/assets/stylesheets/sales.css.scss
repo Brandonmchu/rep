@@ -2,14 +2,16 @@ $font: 'Open Sans', sans-serif;
 $font-color: black;
 $search-margin-top:20px;
 $search-margin-bottom:15px;
-$search-background-color: rgba(255,255,255,0.8);
+$search-background-color: white;
 $search-input-color: #888888;
 $search-input-line-height: 32px;
 $search-border-radius: 4px;
 $search-padding-top-bottom: 5px;
-$filter-color:rgba(22,89,190,0.5);
-$filter-hover-color:rgba(22,89,190,1);
+$filter-color:rgba(52, 73, 94,1.0);
+$filter-hover-color:rgba(41, 128, 185,1.0);
 $filter-font-color:white;
+$green:#1abc9c;
+$darker-green:#16a085;
 
 #topper{
 	height: 3px;
@@ -43,9 +45,6 @@ font-family: $font;
 			width:100%%;
 			padding: $search-padding-top-bottom 5px $search-padding-top-bottom 20px;
 			font-size: 20px;
-			
-		/*			padding: 5px 10% 5px 10%;*/
-			/*text-align: center;*/
 
 		}
 
@@ -248,36 +247,73 @@ overflow: none;
 	width:100%;
 	height:100%;
 	text-align:center;
-	z-index: 1000;
-	background-color:rgba(0,0,0,0.7);
+	z-index: 1005;
+	background-color:rgba(0,0,0,0.9);
+	font-family: $font;
 	.modal_email_subscription {
-		width:300px;
+
+		h2{
+			color: white;;
+		}
+
+		h4{
+			color: #DDDDDD;
+			margin-bottom: 20px;
+		}	
+		
+		width:350px;
      	margin: 100px auto;
-     	background-color: rgba(255, 255, 255, 0.8);
-     	border:1px solid #000;
      	padding:15px;
      	.modal_content{
      		text-align:left;
+     		font-size: 20px;
      		input {
      			width:100%;
+     			margin-bottom: 20px;
+     			border-radius: $search-border-radius;
+     			border:none;
+     			padding: 10px;
+
      		}
+
+     		::-webkit-input-placeholder {
+				text-align:center;
+			}     		
      		button{
      			width:100%;
+     			border-radius: $search-border-radius;
+				border:none;
+				padding: 10px;
+				background-color: green;
+				color: white;
+				margin-top: 30px;
+
+     		}
+     		button:hover{
+     			background-color: $green;
      		}
      	}
  	}
 }
 
 .subscribe{
+	font-family: $font;
+	border-radius: $search-border-radius;
 	position:absolute;
 	right:0px;
-	padding:4px;
-	margin-right: 50px;
+	padding:10px;
+	margin-right:2%;
 	bottom: 0px;
-	margin-bottom:50px;
-	width: auto;
-	height: auto;
-	background-color: #ffffff;
+	margin-bottom:2%;
+	background-color: $darker-green;
+	color: white;
 	z-index:2000;
+	text-align: center;
+	cursor: pointer;
+
 }
 
+.subscribe:hover{
+	background-color: $green;
+
+}

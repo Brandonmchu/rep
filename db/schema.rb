@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 20140715012810) do
     t.integer  "list_price"
     t.integer  "sold_price"
     t.integer  "original_price"
-    t.integer  "taxes"
+    t.string   "taxes"
     t.integer  "days_on_market"
     t.string   "spis"
     t.date     "list_date"

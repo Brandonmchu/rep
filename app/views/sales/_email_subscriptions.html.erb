@@ -1,9 +1,11 @@
 <div id="modal_overlay", onclick='overlay()'>
      <div class="modal_email_subscription">
+     	<h2>Enter your Email and any Address</h2>
+     	<h4>We'll send you an email when there's a new sale within 1km of that address</h4>
      	<div class="modal_content">
-          	<%= text_field_tag :email, nil, placeholder: "Email addy" %>
-        	<%= text_field_tag :loi, nil, placeholder: "Location of Interest" %>
-        	<%= button_tag "Get new sales sent to your email daily!", id: "subscribe_button", onclick: 'subscribe()' %>
+          	<%= text_field_tag :email, nil, placeholder: "Your Email" %>
+        	<%= text_field_tag :loi, nil, placeholder: "Sales <1km of this Address" %>
+        	<%= button_tag "Hook me up with notifications", id: "subscribe_button", onclick: 'subscribe()' %>
         </div>
     </div>
 </div>
