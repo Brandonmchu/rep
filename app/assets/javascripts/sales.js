@@ -72,7 +72,34 @@ function codeAddress() {
   });
 }
 
+function overlay() {
+  el = document.getElementById("modal_overlay");
+  el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 
+}
+
+
+function subscribe(){
+  email = document.getElementById("email").value;
+  loi = document.getElementById("loi").value;
+  if(email==""){
+    alert("I can't send updates if there's no email address!");
+  } else if (loi==""){
+    alert("Where do you want updates for?");
+  } else {
+
+    $.ajax({
+      type: 'POST',
+      url: '/users',
+      data: {'email':email,'locations_of_interest':loi},
+      success: function(data,textStatus,jqXHR){
+          alert(data);
+          el = document.getElementById("modal_overlay");
+          el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+        }
+    });
+  }
+}
 
 $(document).ready(function() 
     { 
@@ -124,7 +151,10 @@ $(document).ready(function()
       // $('.dropdown-menu').click(function(event){
       //   event.stopPropagation();
       // });
-
+      
+      $('.modal_email_subscription').click(function(event){
+        event.stopPropagation();
+      });
 
       $('#datetimepicker1').datetimepicker();
       $('#datetimepicker2').datetimepicker();
