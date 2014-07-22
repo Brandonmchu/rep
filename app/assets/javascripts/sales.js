@@ -81,31 +81,41 @@ function overlay() {
 
 
 function subscribe(){
-  email = document.getElementById("email").value;
-  loi = document.getElementById("loi").value;
-  if(email==""){
-    alert("I can't send updates if there's no email address!");
-  } else if (loi==""){
-    alert("Where do you want updates for?");
-  } else {
+  var email = document.getElementById("email").value;
+  var loi = document.getElementById("loi").value;
+  email = email.toLowerCase();
+  var n = email.search(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
+  var address = loi + "Toronto, Ontario, Canada"
 
-    $.ajax({
-      type: 'POST',
-      url: '/users',
-      data: {'email':email,'locations_of_interest':loi},
-      success: function(data,textStatus,jqXHR){
-          $(".modal_content").hide();
-          $(".modal_email_subscription h4").hide();
-          $(".modal_email_subscription h2").html(data)
-          el = document.getElementById("modal_overlay");
-          var subscribe = $('.subscribe').get(0);
-          setTimeout(function(){
-            el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-            subscribe.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-          },1000);
-        }
+  if(n==-1){
+    alert("That email address looks a bit funny, can you double check it?");
+  } else if (loi==""){
+    alert("Location can't be blank!");
+  } else {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status != google.maps.GeocoderStatus.OK) {
+      alert("Hmmm...We dun goofed! We can't find that address, Can you try typing some variations of it?");
+    } else {
+
+      $.ajax({
+        type: 'POST',
+        url: '/users',
+        data: {'email':email,'locations_of_interest':loi},
+        success: function(data,textStatus,jqXHR){
+            $(".modal_content").hide();
+            $(".modal_email_subscription h4").hide();
+            $(".modal_email_subscription h2").html(data)
+            el = document.getElementById("modal_overlay");
+            var subscribe = $('.subscribe').get(0);
+            setTimeout(function(){
+              el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+              subscribe.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+            },1000);
+          }
+      });
+    }
     });
-  }
+  } 
 }
 
 $(document).ready(function() 
