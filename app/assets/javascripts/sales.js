@@ -66,6 +66,7 @@ function codeAddress() {
           icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
       markers.push(marker);
+      $(".search-block").animate({'top':'-100px'},{duration:1000});      
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -165,9 +166,19 @@ $(document).ready(function()
       text_input.focus ();
       text_input.select ();
   
-      // $('.dropdown-menu').click(function(event){
-      //   event.stopPropagation();
-      // });
+      $('.dropdown-menu').click(function(event){
+        event.stopPropagation();
+      });
+
+      $(".search-block").hover(function(){
+        if (!$(this).hasClass('animated')){
+          $(this).dequeue().stop().animate({'top':'0px'},1000);
+        }
+      },function(){
+        $(this).addClass('animated').animate({'top':'-100px'},1000,function(){
+          $(this).removeClass('animated').dequeue();
+        });
+      });
       
       $('.modal_email_subscription').click(function(event){
         event.stopPropagation();
