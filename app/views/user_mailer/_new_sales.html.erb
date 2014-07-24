@@ -1,0 +1,32 @@
+<% @sales.each do |sale| %>
+	<tr>	
+		<td>
+		<% if sale.house_id == 0 %>
+			Condo
+		<% else %>
+			House
+		<% end %>
+		</td>
+		<td>
+			<address>
+				<strong><%= sale.address %></strong><br>
+				<%= sale.address_two %><br>
+				Days on the Market: <%= sale.days_on_market %>
+			</address>
+		</td>
+		<td>
+			<%= sale.sold_date %><br>
+		</td>
+		<td>
+			<% if sale.house_id == 0 %>
+				<%= sale.non_house.sqft_range_first %> - <%= sale.non_house.sqft_range_second %> sq ft.
+			<% else %>
+				<%= sale.house.lot_square_footage %> sq ft. (lot area)</td>
+			<% end %>
+		</td>
+		<td><%= number_to_currency(sale.sold_price, precision: 0) %></td>
+		<td><%= number_to_currency(sale.list_price, precision: 0) %></td>
+		<td><%= number_to_percentage((sale.sold_price.to_f / sale.list_price.to_f)*100, precision: 2) %></td>
+		<td><%= number_with_precision(sale.distance_from_current_location, precision: 0, delimiter: ',') %> </td>
+	</tr>
+<% end %>
