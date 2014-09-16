@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>There are new sales in an area you are interested in!</h1>
+    <br>
+    	
+	<table class="table table-striped tablesorter">
+		<thead>
+			<th>Type</th>
+			<th>Address</th>
+			<th>Date Sold</th>
+			<th>Size</th>
+			<th>Sold Price</th>
+			<th>List Price</th>
+			<th>% of list</th>
+			<th>Distance</th>
+		</thead>
+		<tbody>
+			<%= render 'new_sales', sales: @sales %>
+		</tbody>
+	</table>
+
+    </p>
+    <p>
+      Check out all the new sales on <%=link_to "REP", @url%>.<br>
+    </p>
+    
+  </body>
+</html>

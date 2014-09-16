@@ -52,7 +52,7 @@ function codeAddress() {
   deleteMarkers();
   var address = document.getElementById("address").value;
   console.log(address)
-  address = address + "Toronto, Ontario, Canada"
+  address = address + " Toronto, Ontario, Canada"
 
   geocoder.geocode( { 'address': address}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
@@ -62,11 +62,12 @@ function codeAddress() {
       map.setCenter(results[0].geometry.location);
       var marker = new google.maps.Marker({
           map: map,
-          position: results[ 0].geometry.location,
+          position: results[0].geometry.location,
           icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
       });
       markers.push(marker);
-      $(".search-block").animate({'top':'-100px'},{duration:1000});      
+
+//      $(".search-block").animate({'top':'-92px'},{duration:1000});      
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -86,7 +87,7 @@ function subscribe(){
   var loi = document.getElementById("loi").value;
   email = email.toLowerCase();
   var n = email.search(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
-  var address = loi + "Toronto, Ontario, Canada"
+  var address = loi + " Toronto, Ontario, Canada"
 
   if(n==-1){
     alert("That email address looks a bit funny, can you double check it?");
@@ -94,10 +95,12 @@ function subscribe(){
     alert("Location can't be blank!");
   } else {
     geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status != google.maps.GeocoderStatus.OK) {
-      alert("Hmmm...We dun goofed! We can't find that address, Can you try typing some variations of it?");
-    } else {
 
+    if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+      alert("Hmmm...We dun goofed! We can't find that address, Can you try typing some variations of it?");
+    } else if (status == google.maps.GeocoderStatus.OK){
+      
+      // even with status = ok this doesn't guarantee the address is avlid because we add Toronto Ontario to anything the user types
       $.ajax({
         type: 'POST',
         url: '/users',
@@ -114,6 +117,9 @@ function subscribe(){
             },1000);
           }
       });
+    }
+    else {
+      alert("Hmmm..We dun goofed! Something is wrong at our headquarters. Please try again soon!");
     }
     });
   } 
@@ -170,15 +176,15 @@ $(document).ready(function()
         event.stopPropagation();
       });
 
-      $(".search-block").hover(function(){
-        if (!$(this).hasClass('animated')){
-          $(this).dequeue().stop().animate({'top':'0px'},1000);
-        }
-      },function(){
-        $(this).addClass('animated').animate({'top':'-100px'},1000,function(){
-          $(this).removeClass('animated').dequeue();
-        });
-      });
+      // $(".search-block").hover(function(){
+      //   if (!$(this).hasClass('animated')){
+      //     $(this).dequeue().stop().animate({'top':'0px'},1000);
+      //   }
+      // },function(){
+      //   $(this).addClass('animated').animate({'top':'-92px'},1000,function(){
+      //     $(this).removeClass('animated').dequeue();
+      //   });
+      // });
       
       $('.modal_email_subscription').click(function(event){
         event.stopPropagation();

@@ -26,7 +26,7 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 gem 'nokogiri'
-
+gem 'tzinfo-data'
 gem 'gmail', :path => 'vendor/gems/gmail-0.4.0'
 # Use jquery as the JavaScript library
 
