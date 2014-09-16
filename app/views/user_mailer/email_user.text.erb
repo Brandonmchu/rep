@@ -1,0 +1,13 @@
+There are new sales in an area you are interested in!
+
+<% @sales.each do |sale| %>
+
+	<% if sale.house_id == 0 %>
+		A Condo was 
+	<% else %>
+		A House was 
+	<% end %>
+
+	listed at <%= number_to_currency(sale.list_price, precision: 0) %> and sold for <%= number_to_currency(sale.sold_price, precision: 0) %> at <%= sale.address %>.
+
+<% end %>
