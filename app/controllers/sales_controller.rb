@@ -7,12 +7,12 @@ class SalesController < ApplicationController
     longitude = params[:longitude] || -79.38318429999998
     proximity = params[:proximity] || 1000
     if params[:start_date].nil?
-      @start_date = Time.now - 50.days
+      @start_date = DateTime.civil_from_format :local, 2014, 8, 1
     else
       @start_date = Date.parse(params[:start_date])
     end
     if params[:end_date].nil?
-      @end_date = Time.now
+      @end_date = DateTime.civil_from_format :local, 2014, 9, 1
     else
       @end_date = Date.parse(params[:end_date])
     end 
