@@ -10,8 +10,8 @@
 						    <%= hidden_field_tag :latitude %>
 						    <%= hidden_field_tag :longitude %>
 						    <%= hidden_field_tag :proximity, 1000 %>
-						    <%= hidden_field_tag :start_date, Time.now - 50.days %>
-						    <%= hidden_field_tag :end_date, Time.now %>
+						    <%= hidden_field_tag :start_date, @start_date %>
+						    <%= hidden_field_tag :end_date, @end_date %>
 					    </div>
 					    <div class="col-md-2 no-padding">
 					    	<div class="proximity-filter">
